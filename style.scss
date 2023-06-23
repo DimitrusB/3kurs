@@ -42,6 +42,9 @@ body{
     line-height: 72px;
     color: var(--blue-100, #0080C1);
     }
+&_lay:active {
+        box-shadow: inset 0 0 5px rgba(0, 0, 0, .5);
+       }
 &_choose{
     display: flex;
     gap: 26px;
@@ -72,5 +75,8 @@ body{
     border-radius: 12px;
     background: var(--salad-60, #7AC100);
     border: none;
+}
+&_butt:active{
+        box-shadow: inset 0 0 5px rgba(0, 0, 0, .5);
 }
 }
