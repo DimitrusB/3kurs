@@ -23,11 +23,54 @@ const renderChoosePage = ()=>{
             <label for="option3">3</label>
             </div>
         </form>
-            <button class="main__window_butt">Старт</button>
+            <button class="main__window_butt" id="chooseButton">Старт</button>
     </div>
     `
     appEl.innerHTML = choosePageHtml;
 
-}
+    const easyLevel = document.getElementById('option1');
+    const middleLevel = document.getElementById('option2');
+    const hardLevel = document.getElementById('option3');
+    const chooseButton = document.getElementById('chooseButton');
 
+    chooseButton.addEventListener('click', (event) =>{
+        event.preventDefault();
+        if (easyLevel.checked){
+        const renderEasyPage =
+            `<div class="center">
+            <div  class="main__window_choose">
+            <input type="radio" id="option1" name="options" value="Option 1" > 
+            <label for="option1">1</label>
+            </div>
+             </div>
+            `
+        appEl.innerHTML=renderEasyPage;
+        }
+        else if (middleLevel.checked){
+            const renderMiddlePage =
+                `<div class="center">
+                <div  class="main__window_choose">
+                <input type="radio" id="option2" name="options" value="Option 2" >
+                <label for="option2">2</label>
+                </div>
+                 </div>
+                `
+        appEl.innerHTML=renderMiddlePage;
+            }
+        else if (hardLevel.checked){
+            const renderHardPage =
+                    `<div class="center">
+                    <div  class="main__window_choose">
+                    <input type="radio" id="option3" name="options" value="Option 3">
+                    <label for="option3">3</label>
+                    </div>
+                     </div>
+                    `
+        appEl.innerHTML=renderHardPage;
+                }
+    })
+
+}
 renderChoosePage();
+
+
