@@ -40,9 +40,14 @@ const renderChoosePage = ()=>{
 
         if (easyLevel.checked){
         const renderEasyPage =
-            `<span class="timerMin">min</span>
+        
+            `<div>
+            <div>
+            <span class="timerMin">min</span>
             <span class="timerSec">sec</span>
-            <div id="timer" class="timer">00:00</div>
+            <button class="game_butt" id="startGame">Начать заново</button>
+            </div>
+            <div id="timer" class="timer">00:00</div></div>
             <div class="center">
             <div  class="main__window_choose">
             <input type="radio" id="option1" name="options" value="Option 1" > 
@@ -52,15 +57,22 @@ const renderChoosePage = ()=>{
             `
         appEl.innerHTML=renderEasyPage;
         const timer = document.getElementById('timer');
-
+        const goBegin = document.getElementById('startGame')
         timerSet(timer);
 
+        goBegin.addEventListener('click', () =>{
+            renderChoosePage();
+        })
           }
         else if (middleLevel.checked){
             const renderMiddlePage =
-                `<span class="timerMin">min</span>
+                `<div>
+                <div>
+                <span class="timerMin">min</span>
                 <span class="timerSec">sec</span>
-                <div id="timer" class="timer">00:00</div>
+                <button class="game_butt" id="startGame">Начать заново</button>
+                </div>
+                <div id="timer" class="timer">00:00</div></div>
                 <div class="center">
                 <div  class="main__window_choose">
                 <input type="radio" id="option2" name="options" value="Option 2" >
@@ -70,12 +82,20 @@ const renderChoosePage = ()=>{
                 `
         appEl.innerHTML=renderMiddlePage;
         timerSet(timer);
-            }
+        const goBegin = document.getElementById('startGame')
+        goBegin.addEventListener('click', () =>{
+            renderChoosePage();
+        });
+             }
         else if (hardLevel.checked){
             const renderHardPage =
-                    `<span class="timerMin">min</span>
+                    `<div>
+                    <div>
+                    <span class="timerMin">min</span>
                     <span class="timerSec">sec</span>
-                    <div id="timer" class="timer">00:00</div>
+                    <button class="game_butt" id="startGame">Начать заново</button>
+                    </div>
+                    <div id="timer" class="timer">00:00</div></div>
                     <div class="center">
                     <div  class="main__window_choose">
                     <input type="radio" id="option3" name="options" value="Option 3">
@@ -85,10 +105,12 @@ const renderChoosePage = ()=>{
                     `
         appEl.innerHTML=renderHardPage;
         timerSet(timer);
-                }
+        const goBegin = document.getElementById('startGame')
+        goBegin.addEventListener('click', () =>{
+            renderChoosePage();
+        });
+    }
     })
 
 }
 renderChoosePage();
-
-
