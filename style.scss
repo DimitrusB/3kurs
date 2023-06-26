@@ -25,6 +25,10 @@ body{
     background: #C2F5FF;
     flex-direction: column;
     align-items: center;
+&_form{
+    display: flex;
+    gap: 24px;
+}
 &_lay{
     border: none;
     display: flex;
@@ -46,8 +50,39 @@ body{
         box-shadow: inset 0 0 5px rgba(0, 0, 0, .5);
        }
 &_choose{
+        display: inline-block;
+        margin-top: 48px;
+        
+}
+&_choose input[type=radio] {
+	display: none;
+}
+&_choose label {
     display: flex;
-    gap: 26px;
+    cursor: pointer;
+    line-height: 34px;
+    border-radius: 12px;
+    background: #FFF;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    color: var(--blue-100, #0080C1);
+    text-align: center;
+    font-size: 64px;
+    line-height: 72px;
+    width: 96px;
+    height: 98px;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+&_choose input[type=radio]:checked + label {
+	background: #ffe0a6;
+}
+&_choose label:hover {
+	color: #666;
 }
 &_senc{
     width: 208px;
