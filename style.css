@@ -116,4 +116,27 @@ body {
 }
 .main__window_butt:active {
   box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.timer {
+  color: #FFF;
+  font-size: 64px;
+  line-height: 72px;
+  margin-left: 22px;
+}
+
+.timerMin {
+  display: inline-block;
+  color: #FFF;
+  font-size: 16px;
+  line-height: 32px;
+  margin-top: 41px;
+  padding-left: 61px;
+  padding-right: 57px;
+}
+
+.timerSec {
+  color: #FFF;
+  font-size: 16px;
+  line-height: 32px;
 }/*# sourceMappingURL=style.css.map */
