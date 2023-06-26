@@ -1,3 +1,5 @@
+import { timerSet } from "./modulFunc.js";
+
 
 
 const renderChoosePage = ()=>{
@@ -36,22 +38,6 @@ const renderChoosePage = ()=>{
     chooseButton.addEventListener('click', (event) =>{
         event.preventDefault();
 
-         let time = 0;
-     
-         function updateTime() {
-            time++;
-            const minutes = Math.floor(time / 60);
-            const seconds = Math.floor(time % 60);
-            const formattedTime = pad(minutes) + ':' + pad(seconds);
-            timer.textContent = formattedTime;
-          }
-
-        function pad(value) {
-            return value < 10 ? '0' + value : value;
-          }
-
-        setInterval(updateTime, 1000);
-    
         if (easyLevel.checked){
         const renderEasyPage =
             `<span class="timerMin">min</span>
@@ -67,7 +53,8 @@ const renderChoosePage = ()=>{
         appEl.innerHTML=renderEasyPage;
         const timer = document.getElementById('timer');
 
-        updateTime();
+        timerSet(timer);
+
           }
         else if (middleLevel.checked){
             const renderMiddlePage =
@@ -82,6 +69,7 @@ const renderChoosePage = ()=>{
                  </div>
                 `
         appEl.innerHTML=renderMiddlePage;
+        timerSet(timer);
             }
         else if (hardLevel.checked){
             const renderHardPage =
@@ -96,6 +84,7 @@ const renderChoosePage = ()=>{
                      </div>
                     `
         appEl.innerHTML=renderHardPage;
+        timerSet(timer);
                 }
     })
 
