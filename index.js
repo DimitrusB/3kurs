@@ -46,10 +46,10 @@ const renderChoosePage = ()=>{
             <div id="timer" class="timer">00:00</div>
           </div>
           <div class="center">
-            <div class="main__window_choose">
+            <form class="main__window_choose">
               <input type="radio" id="option${level}" name="options" value="Option ${level}">
               <label for="option${level}">${level}</label>
-            </div>
+            </form>
           </div>
         `;
         
@@ -65,8 +65,17 @@ const renderChoosePage = ()=>{
       chooseButton.addEventListener('click', (event) => {
         event.preventDefault();
       
-        let level = easyLevel.checked ? "1" : middleLevel.checked ? "2" : hardLevel.checked ? "3" : null; 
-        if (level === null) {
+      let level = '';
+      
+      if (easyLevel.checked){
+          level = '1';
+        }else if (middleLevel.checked){
+          level = '2';
+        }
+        else if (hardLevel.checked){
+          level ='3';
+        }
+        else if (level === null) {
           return;
         }
         
