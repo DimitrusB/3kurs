@@ -35,7 +35,7 @@ const renderChoosePage = ()=>{
     const hardLevel = document.getElementById('option3');
     const chooseButton = document.getElementById('chooseButton');
 
-    function renderLevel(level, renderPage) {
+    function renderLevel(level) {
         const renderLevelPage = `
           <div>
             <div>
@@ -75,11 +75,12 @@ const renderChoosePage = ()=>{
         else if (hardLevel.checked){
           level ='3';
         }
-        else if (level === null) {
+        else if (!level) {
+          alert('Выберите уровень сложности!!!')
           return;
         }
         
-        renderLevel(level, renderChoosePage);
+        renderLevel(level);
       });
 }
 renderChoosePage();
