@@ -10,8 +10,13 @@
     "author": "",
     "license": "ISC",
     "devDependencies": {
+        "eslint": "^8.44.0",
         "prettier": "^2.8.8",
         "webpack": "^5.88.0",
         "webpack-cli": "^5.1.4"
+    },
+    "dependencies": {
+        "eslint-config-prettier": "^8.8.0",
+        "eslint-plugin-prettier": "^4.2.1"
     }
 }
