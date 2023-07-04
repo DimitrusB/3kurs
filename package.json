@@ -1,15 +1,17 @@
 {
-  "name": "3kurs",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "dev": "webpack --mode development --watch"
-  },
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "webpack": "^5.88.0",
-    "webpack-cli": "^5.1.4"
-  }
+    "name": "3kurs",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "dev": "webpack --mode development --watch",
+        "format": "prettier --write ./src/"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "prettier": "^2.8.8",
+        "webpack": "^5.88.0",
+        "webpack-cli": "^5.1.4"
+    }
 }
