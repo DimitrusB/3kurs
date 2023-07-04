@@ -32,6 +32,24 @@ const renderChoosePage = () => {
     const middleLevel = document.getElementById('option2')
     const hardLevel = document.getElementById('option3')
     const chooseButton = document.getElementById('chooseButton')
+var cards = [
+    {
+    name: "tuzpik",
+    img: "./src/img/туз пики.jpg"
+    },
+    {
+        name: "tuzcherv",
+        img: "./src/img/туз черви.jpg"  
+    },
+    {
+        name: "tezkrest",
+        img: "./src/img/туз крести.jpg"  
+    },
+    {
+        name: "tezkbub",
+        img: "./src/img/туз бубны.jpg"  
+    }
+]
 
     function renderLevel(level) {
         const renderLevelPage = `
