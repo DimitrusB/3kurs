@@ -8,7 +8,6 @@
         "format": "prettier --write ./src/",
         "lint:js": "eslint ./src/**/*.js",
         "lint:scss": "stylelint **/*.scss"
-        
     },
     "author": "",
     "license": "ISC",

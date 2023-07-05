@@ -9,12 +9,19 @@
 }
 body {
     background: #004980;
+    width: 1024px;
 }
 .center {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    &__second{
+        position: absolute;
+        left: 50%;
+        top: 52px;
+        transform: translate(-50%, -50%);
+    }
 }
 .main__window {
     display: flex;
@@ -125,7 +132,7 @@ body {
     color: #fff;
     font-size: 16px;
     line-height: 32px;
-    margin-top: 41px;
+    margin-top: 22px;
     padding-left: 61px;
     padding-right: 57px;
 }
@@ -136,7 +143,7 @@ body {
 }
 .game_butt {
     float: right;
-    margin-top: 52px;
+    margin-top: 62px;
     margin-right: 23px;
     display: inline-block;
     width: 246px;
@@ -155,3 +162,67 @@ body {
     border: none;
     cursor: pointer;
 }
+.row{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 35px;
+}
+.second{
+    position: absolute;
+    margin-left: 22px;
+    width: 1024px;
+    &__main{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 1024px;
+        justify-content: space-between;
+    }
+}
+.card {
+    color: #000000;
+    width: 95px;
+    height: 133px;
+    background-color: white;
+    border-radius: 4px;
+    font-size: 24px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 5px 8px;
+  }
+  .card .symbol-top-right,
+.card .symbol-bottom-left {
+  font-size: 12px;
+  line-height: 12px;
+}
+
+.card .symbol-top-right, 
+.card .symbol-bottom-left {
+  transform: rotate(180deg);
+}
+
+.card .symbol-bottom-right {
+  font-size: 24px;
+  transform: rotate(180deg);
+}
+.card .center__suit {
+    text-align: center;
+    top: -5px;
+    position: relative;
+  }
+  
+  .symbol-card {
+    width: 4px;
+    height: 5px;
+  }
+  .block-symbol {
+    display: flex;
+    align-items: flex-start;
+    padding-left: 4px;
+  }
+  .center__suit img {
+    transform: scale(4.3);
+  }

@@ -1,7 +1,8 @@
-import { timerSet } from './modulFunc.js'
 
-const renderChoosePage = () => {
-    const appEl = document.getElementById('app')
+import { renderCards } from './pagecards.js'
+
+export const renderChoosePage = () => {
+   const appEl = document.getElementById('app')
 
     const choosePageHtml = `
     <div class="center">
@@ -32,52 +33,34 @@ const renderChoosePage = () => {
     const middleLevel = document.getElementById('option2')
     const hardLevel = document.getElementById('option3')
     const chooseButton = document.getElementById('chooseButton')
-var cards = [
-    {
-    name: "tuzpik",
-    img: "./src/img/туз пики.jpg"
-    },
-    {
-        name: "tuzcherv",
-        img: "./src/img/туз черви.jpg"  
-    },
-    {
-        name: "tezkrest",
-        img: "./src/img/туз крести.jpg"  
-    },
-    {
-        name: "tezkbub",
-        img: "./src/img/туз бубны.jpg"  
-    }
-]
 
-    function renderLevel(level) {
-        const renderLevelPage = `
-          <div>
-            <div>
-              <span class="timerMin">min</span>
-              <span class="timerSec">sec</span>
-              <button class="game_butt" id="startGame">Начать заново</button>
-            </div>
-            <div id="timer" class="timer">00:00</div>
-          </div>
-          <div class="center">
-            <form class="main__window_choose">
-              <input type="radio" id="option${level}" name="options" value="Option ${level}">
-              <label for="option${level}">${level}</label>
-            </form>
-          </div>
-        `
+    // function renderLevel(level) {
+    //     const renderLevelPage = `
+    //       <div>
+    //         <div>
+    //           <span class="timerMin">min</span>
+    //           <span class="timerSec">sec</span>
+    //           <button class="game_butt" id="startGame">Начать заново</button>
+    //         </div>
+    //         <div id="timer" class="timer">00:00</div>
+    //       </div>
+    //       <div class="center">
+    //         <form class="main__window_choose">
+    //           <input type="radio" id="option${level}" name="options" value="Option ${level}">
+    //           <label for="option${level}">${level}</label>
+    //         </form>
+    //       </div>
+    //     `
 
-        appEl.innerHTML = renderLevelPage
-        const timer = document.getElementById('timer')
-        const goBegin = document.getElementById('startGame')
-        timerSet(timer)
+    //     appEl.innerHTML = renderLevelPage
+    //     const timer = document.getElementById('timer')
+    //     const goBegin = document.getElementById('startGame')
+    //     timerSet(timer)
 
-        goBegin.addEventListener('click', () => {
-            renderChoosePage()
-        })
-    }
+    //     goBegin.addEventListener('click', () => {
+    //         renderChoosePage()
+    //     })
+    // }
 
     chooseButton.addEventListener('click', (event) => {
         event.preventDefault()
@@ -85,17 +68,16 @@ var cards = [
         let level = ''
 
         if (easyLevel.checked) {
-            level = '1'
+            renderCards()
         } else if (middleLevel.checked) {
-            level = '2'
+            renderCards()
         } else if (hardLevel.checked) {
-            level = '3'
+            renderCards()
         } else if (!level) {
             alert('Выберите уровень сложности!!!')
             return
         }
 
-        renderLevel(level)
     })
 }
 renderChoosePage()
