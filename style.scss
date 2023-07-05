@@ -4,8 +4,8 @@
     font-family: myfont, sans-serif;
 }
 @font-face {
-    font-family: "myfont";
-    src: url("fonts/stratosskyengweb-regular.woff") format("woff");
+    font-family: 'myfont';
+    src: url('fonts/stratosskyengweb-regular.woff') format('woff');
 }
 body {
     background: #004980;
@@ -16,7 +16,7 @@ body {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    &__second{
+    &__second {
         position: absolute;
         left: 50%;
         top: 52px;
@@ -59,7 +59,7 @@ body {
         display: inline-block;
         margin-top: 48px;
     }
-    &_choose input[type="radio"] {
+    &_choose input[type='radio'] {
         display: none;
     }
     &_choose label {
@@ -83,7 +83,7 @@ body {
         align-content: center;
         align-items: center;
     }
-    &_choose input[type="radio"]:checked + label {
+    &_choose input[type='radio']:checked + label {
         background: #ffe0a6;
     }
     &_choose label:hover {
@@ -162,17 +162,17 @@ body {
     border: none;
     cursor: pointer;
 }
-.row{
+.row {
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
     margin-top: 35px;
 }
-.second{
+.second {
     position: absolute;
     margin-left: 22px;
     width: 1024px;
-    &__main{
+    &__main {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
@@ -192,37 +192,33 @@ body {
     flex-direction: column;
     justify-content: space-between;
     padding: 5px 8px;
-  }
-  .card .symbol-top-right,
-.card .symbol-bottom-left {
-  font-size: 12px;
-  line-height: 12px;
+}
+.symbol-top-right,
+.symbol-bottom-left {
+    font-size: 12px;
+    line-height: 12px;
+    transform: rotate(180deg);
 }
 
-.card .symbol-top-right, 
-.card .symbol-bottom-left {
-  transform: rotate(180deg);
+.symbol-bottom-right {
+    font-size: 24px;
+    transform: rotate(180deg);
 }
-
-.card .symbol-bottom-right {
-  font-size: 24px;
-  transform: rotate(180deg);
-}
-.card .center__suit {
+.center__suit {
     text-align: center;
     top: -5px;
     position: relative;
-  }
-  
-  .symbol-card {
+}
+
+.symbol-card {
     width: 4px;
     height: 5px;
-  }
-  .block-symbol {
+}
+.block-symbol {
     display: flex;
     align-items: flex-start;
     padding-left: 4px;
-  }
-  .center__suit img {
+}
+.center__suit img {
     transform: scale(4.3);
-  }
+}

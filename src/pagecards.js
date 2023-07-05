@@ -13,7 +13,6 @@ export function renderCards() {
             </div>
               <button class="game_butt" id="startGame">Начать заново</button>
             </div> 
-
           <div class="second">
           <div class="card-back"></div>
           <div class="card-deck"></div>  
@@ -38,7 +37,6 @@ export function renderCards() {
     const ranks = ['6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
 
     let deck = []
-    let back = []
 
     for (let i = 0; i < suits.length; i++) {
         for (let j = 0; j < ranks.length; j++) {

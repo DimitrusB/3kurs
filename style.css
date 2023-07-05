@@ -204,23 +204,19 @@ body {
   padding: 5px 8px;
 }
 
-.card .symbol-top-right,
-.card .symbol-bottom-left {
+.symbol-top-right,
+.symbol-bottom-left {
   font-size: 12px;
   line-height: 12px;
-}
-
-.card .symbol-top-right,
-.card .symbol-bottom-left {
   transform: rotate(180deg);
 }
 
-.card .symbol-bottom-right {
+.symbol-bottom-right {
   font-size: 24px;
   transform: rotate(180deg);
 }
 
-.card .center__suit {
+.center__suit {
   text-align: center;
   top: -5px;
   position: relative;
