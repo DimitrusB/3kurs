@@ -39,11 +39,11 @@ export const renderChoosePage = () => {
         let level = ''
 
         if (easyLevel.checked) {
-            renderCards()
+            renderCards(3)
         } else if (middleLevel.checked) {
-            renderCards()
+            renderCards(6)
         } else if (hardLevel.checked) {
-            renderCards()
+            renderCards(9)
         } else if (!level) {
             alert('Выберите уровень сложности!!!')
             return
