@@ -1,8 +1,7 @@
-
 import { renderCards } from './pagecards.js'
 
 export const renderChoosePage = () => {
-   const appEl = document.getElementById('app')
+    const appEl = document.getElementById('app')
 
     const choosePageHtml = `
     <div class="center">
@@ -34,34 +33,6 @@ export const renderChoosePage = () => {
     const hardLevel = document.getElementById('option3')
     const chooseButton = document.getElementById('chooseButton')
 
-    // function renderLevel(level) {
-    //     const renderLevelPage = `
-    //       <div>
-    //         <div>
-    //           <span class="timerMin">min</span>
-    //           <span class="timerSec">sec</span>
-    //           <button class="game_butt" id="startGame">Начать заново</button>
-    //         </div>
-    //         <div id="timer" class="timer">00:00</div>
-    //       </div>
-    //       <div class="center">
-    //         <form class="main__window_choose">
-    //           <input type="radio" id="option${level}" name="options" value="Option ${level}">
-    //           <label for="option${level}">${level}</label>
-    //         </form>
-    //       </div>
-    //     `
-
-    //     appEl.innerHTML = renderLevelPage
-    //     const timer = document.getElementById('timer')
-    //     const goBegin = document.getElementById('startGame')
-    //     timerSet(timer)
-
-    //     goBegin.addEventListener('click', () => {
-    //         renderChoosePage()
-    //     })
-    // }
-
     chooseButton.addEventListener('click', (event) => {
         event.preventDefault()
 
@@ -77,7 +48,6 @@ export const renderChoosePage = () => {
             alert('Выберите уровень сложности!!!')
             return
         }
-
     })
 }
 renderChoosePage()
