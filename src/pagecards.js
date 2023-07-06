@@ -48,11 +48,11 @@ export function renderCards(pairCount) {
 
     allCards.sort(() => Math.random() - 0.5)
 
-   
+   console.log(allCards);
     let cardsHtml = '<div class="row">'
     for (let i = 0; i < allCards.length; i++) {
         cardsHtml += `
-            <div class="card ${allCards[i].rank}">
+            <div class="card ${allCards[i].rank}" data-rank="${allCards[i].rank}">
                 <div class="symbol-top-left"><div>${allCards[i].rank}</div><div class="block-symbol">${allCards[i].suit}</div></div>
                 <div class="center__suit">${allCards[i].suit}</div>
                 <div class="symbol-bottom-right"><div>${allCards[i].rank}</div><div class="block-symbol">${allCards[i].suit}</div></div>
@@ -70,4 +70,44 @@ export function renderCards(pairCount) {
 
     const timer = document.getElementById('timer')
     timerSet(timer)
+
+    let firstCard = null;
+
+// Функция, которая будет запускаться при клике на карту
+function clickCardHandler(event) {
+    const card = event.target.closest('.card')
+    if (!firstCard) {
+        // Если еще не выбрана первая карта, то просто сохраняем ее в firstCard
+        firstCard = card
+        firstCard.classList.add('card-selected')
+    } else {
+        let secondCard = card // сохраняем выбранную вторую карту
+        if (firstCard && secondCard) {
+            // Если игрок выбрал две карты
+            if (firstCard.dataset.rank === secondCard.dataset.rank) {
+                // Если карты совпали
+                firstCard.classList.add('card-paired')
+                secondCard.classList.add('card-paired')
+            } else {
+                // Если карты не совпали
+                alert("Вы проиграли!")
+                firstCard.classList.remove('card-selected')
+                secondCard.classList.remove('card-selected')
+            }
+            // Сбрасываем выбор карт
+            firstCard = null
+        } else {
+            // Если игрок выбрал только одну карту
+            firstCard = card
+            firstCard.classList.add('card-selected')
+        }
+    }
+}
+
+// Добавляем обработчик события для каждой карты
+const cards = document.querySelectorAll('.card')
+
+for (const card of cards) {
+    card.addEventListener('click', clickCardHandler)
+}
 }

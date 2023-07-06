@@ -194,7 +194,18 @@ body {
     padding: 5px 8px;
 }
 .card__back{
-    background-image: url(./src/img/back.jpg);
+    color: #000000;
+    box-shadow: 10px 5px 5px green;
+    width: 95px;
+    height: 133px;
+    background-color: white;
+    border-radius: 4px;
+    font-size: 24px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 5px 8px;
 }
 .symbol-top-right,
 .symbol-bottom-left {
@@ -224,4 +235,10 @@ body {
 }
 .center__suit img {
     transform: scale(4.3);
+}
+.card-selected{
+    box-shadow: 10px 5px 5px red;
+}
+.card-paired{
+    box-shadow: 10px 5px 5px green;
 }
