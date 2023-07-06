@@ -38,7 +38,7 @@ export function renderCards(pairCount) {
             })
         }
     }
-
+    
     const allCards = []
     for (let i = 0; i < pairCount; i++) {
         const randomCard = deck[Math.floor(Math.random() * deck.length)]
@@ -48,6 +48,7 @@ export function renderCards(pairCount) {
 
     allCards.sort(() => Math.random() - 0.5)
 
+   
     let cardsHtml = '<div class="row">'
     for (let i = 0; i < allCards.length; i++) {
         cardsHtml += `
@@ -61,14 +62,6 @@ export function renderCards(pairCount) {
     cardsHtml += '</div>'
 
     document.querySelector('.card-deck').innerHTML = cardsHtml
-
-    let backHtml = '<div class="row">'
-    for (let i = 0; i < allCards.length; i++) {
-        backHtml += `<div class="card-back"><img src="./src/img/back.jpg" style="border-radius: 4px;"></div>`
-    }
-    backHtml += '</div>'
-
-    document.querySelector('.card-back').innerHTML = backHtml
 
     const goBegin = document.getElementById('startGame')
     goBegin.addEventListener('click', () => {
