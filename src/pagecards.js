@@ -38,7 +38,7 @@ export function renderCards(pairCount) {
             })
         }
     }
-    
+
     const allCards = []
     for (let i = 0; i < pairCount; i++) {
         const randomCard = deck[Math.floor(Math.random() * deck.length)]
@@ -47,8 +47,8 @@ export function renderCards(pairCount) {
     }
 
     allCards.sort(() => Math.random() - 0.5)
-
-   console.log(allCards);
+    let stoppedTime = 0
+    console.log(allCards)
     let cardsHtml = '<div class="row">'
     for (let i = 0; i < allCards.length; i++) {
         cardsHtml += `
@@ -57,10 +57,28 @@ export function renderCards(pairCount) {
                 <div class="center__suit">${allCards[i].suit}</div>
                 <div class="symbol-bottom-right"><div>${allCards[i].rank}</div><div class="block-symbol">${allCards[i].suit}</div></div>
             </div>
-        `
+       `
     }
     cardsHtml += '</div>'
+    cardsHtml += `            <div class="popup" id="popup-win">
+    <div class="popup-content">
+        <img src="./src/img/celebration.svg" alt="Win">
+        <h3 class="popup-header">Вы выиграли!</h3>
+        <p class="popup-text">Затраченное время:</p>
+        <p class="popup-text">${stoppedTime}</p>
+        <button class="popup__btn">Играть снова</button>
+    </div>
+    </div>
 
+    <div class="popup" id="popup-lose">
+    <div class="popup-content">
+        <img src="./src/img/dead.svg" alt="Lose">
+        <h3 class="popup-header">Вы проиграли!</h3>
+        <p class="popup-text">Затраченное время:</p>
+        <p class="popup-text">${stoppedTime}</p>
+        <button class="popup__btn">Играть снова</button>
+    </div>
+    </div>`
     document.querySelector('.card-deck').innerHTML = cardsHtml
 
     const goBegin = document.getElementById('startGame')
@@ -68,46 +86,60 @@ export function renderCards(pairCount) {
         renderChoosePage()
     })
 
-    const timer = document.getElementById('timer')
+    const myTimer = timerSet(document.getElementById('timer'))
     timerSet(timer)
-
-    let firstCard = null;
-
-// Функция, которая будет запускаться при клике на карту
-function clickCardHandler(event) {
-    const card = event.target.closest('.card')
-    if (!firstCard) {
-        // Если еще не выбрана первая карта, то просто сохраняем ее в firstCard
-        firstCard = card
-        firstCard.classList.add('card-selected')
-    } else {
-        let secondCard = card // сохраняем выбранную вторую карту
-        if (firstCard && secondCard) {
-            // Если игрок выбрал две карты
-            if (firstCard.dataset.rank === secondCard.dataset.rank) {
-                // Если карты совпали
-                firstCard.classList.add('card-paired')
-                secondCard.classList.add('card-paired')
-            } else {
-                // Если карты не совпали
-                alert("Вы проиграли!")
-                firstCard.classList.remove('card-selected')
-                secondCard.classList.remove('card-selected')
-            }
-            // Сбрасываем выбор карт
-            firstCard = null
-        } else {
-            // Если игрок выбрал только одну карту
+    
+    let firstCard = null
+    let pairsFound = 0
+    
+    // Функция, которая будет запускаться при клике на карту
+    function clickCardHandler(event) {
+        
+        const stoppedTime = myTimer.stopTimer()
+        const card = event.target.closest('.card')
+        if (!firstCard) {
             firstCard = card
             firstCard.classList.add('card-selected')
+        } else {
+            let secondCard = card
+            if (firstCard && secondCard) {
+                if (firstCard.dataset.rank === secondCard.dataset.rank) {
+                    firstCard.classList.add('card-paired')
+                    secondCard.classList.add('card-paired')
+                    pairsFound++ // увеличиваем количество найденных пар
+                    if (pairsFound === cards.length / 2) {
+                        const popupWin = document.querySelector('#popup-win')
+                        popupWin.style.display = 'block'
+                        myTimer.stopTimer()
+                    }
+                } else {
+                    const popupLose = document.querySelector('#popup-lose')
+                    popupLose.style.display = 'block'
+                    firstCard.classList.remove('card-selected')
+                    secondCard.classList.remove('card-selected')
+                    myTimer.stopTimer()
+                }
+                firstCard = null
+                secondCard = null
+            } else {
+                firstCard = card
+                firstCard.classList.add('card-selected')
+                stoppedTime = myTimer.stopTimer()
+            }
         }
     }
-}
 
-// Добавляем обработчик события для каждой карты
-const cards = document.querySelectorAll('.card')
+    // Добавляем обработчик события для каждой карты
+    const cards = document.querySelectorAll('.card')
 
-for (const card of cards) {
-    card.addEventListener('click', clickCardHandler)
-}
+    for (const card of cards) {
+        card.addEventListener('click', clickCardHandler)
+    }
+    const popupCloseBtns = document.querySelectorAll('.popup__btn');
+    popupCloseBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        const popup = this.closest('.popup');
+        popup.style.display = 'none';
+      });
+    });
 }

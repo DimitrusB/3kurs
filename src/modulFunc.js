@@ -1,5 +1,6 @@
 export function timerSet(timer) {
     let time = 0
+
     function updateTime() {
         time++
         const minutes = Math.floor(time / 60)
@@ -11,6 +12,15 @@ export function timerSet(timer) {
     function pad(value) {
         return value < 10 ? '0' + value : value
     }
-    setInterval(updateTime, 1000)
-    updateTime()
+
+    const timerInterval = setInterval(updateTime, 1000)
+
+    function stopTimer() {
+        clearInterval(timerInterval)
+        return time
+    }
+
+    return {
+        stopTimer: stopTimer
+    }
 }
