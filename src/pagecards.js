@@ -1,4 +1,4 @@
-import { renderChoosePage } from './index.js'
+import { level, renderChoosePage } from './index.js'
 import { timerSet } from './modulFunc.js'
 
 export function renderCards(pairCount) {
@@ -17,16 +17,16 @@ export function renderCards(pairCount) {
                 <div class="card-back"></div>
                 <div class="card-deck"></div>  
             </div>
+           
         </div>
+        
     `
     appEl.innerHTML = PageHtml
-
-    const suits = [
-        '<img src="./src/img/clubs.svg">',
-        '<img src="./src/img/diamonds.svg">',
-        '<img src="./src/img/hearts.svg">',
-        '<img src="./src/img/spades.svg">',
-    ]
+    const clubs ='<img src="./src/img/clubs.svg">'
+    const diamonds = '<img src="./src/img/diamonds.svg">'
+    const hearts = '<img src="./src/img/hearts.svg">'
+    const spades = '<img src="./src/img/spades.svg">'
+    const suits = [clubs, diamonds, hearts, spades]
     const ranks = ['6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
 
     const deck = []
@@ -56,11 +56,10 @@ export function renderCards(pairCount) {
                 <div class="symbol-top-left"><div>${allCards[i].rank}</div><div class="block-symbol">${allCards[i].suit}</div></div>
                 <div class="center__suit">${allCards[i].suit}</div>
                 <div class="symbol-bottom-right"><div>${allCards[i].rank}</div><div class="block-symbol">${allCards[i].suit}</div></div>
-            </div>
-       `
+            </div>`
     }
     cardsHtml += '</div>'
-    cardsHtml += `            <div class="popup" id="popup-win">
+    cardsHtml += `<div class="popup" id="popup-win">
     <div class="popup-content">
         <img src="./src/img/celebration.svg" alt="Win">
         <h3 class="popup-header">Вы выиграли!</h3>
@@ -78,11 +77,16 @@ export function renderCards(pairCount) {
         <p class="popup-text">${stoppedTime}</p>
         <button class="popup__btn">Играть снова</button>
     </div>
-    </div>`
+    </div>
+    <button class="game_butt_down" id="chooseLevel">Выбрать уровень</button>`
     document.querySelector('.card-deck').innerHTML = cardsHtml
 
     const goBegin = document.getElementById('startGame')
     goBegin.addEventListener('click', () => {
+        renderCards(level)
+    })
+    const chooseLevel = document.getElementById('chooseLevel')
+    chooseLevel.addEventListener('click', () => {
         renderChoosePage()
     })
 
@@ -97,6 +101,11 @@ export function renderCards(pairCount) {
         
         const stoppedTime = myTimer.stopTimer()
         const card = event.target.closest('.card')
+
+        if (card.classList.contains('card-paired')) {
+            return;
+        }
+
         if (!firstCard) {
             firstCard = card
             firstCard.classList.add('card-selected')
@@ -106,7 +115,7 @@ export function renderCards(pairCount) {
                 if (firstCard.dataset.rank === secondCard.dataset.rank) {
                     firstCard.classList.add('card-paired')
                     secondCard.classList.add('card-paired')
-                    pairsFound++ // увеличиваем количество найденных пар
+                    pairsFound++
                     if (pairsFound === cards.length / 2) {
                         const popupWin = document.querySelector('#popup-win')
                         popupWin.style.display = 'block'
@@ -129,7 +138,6 @@ export function renderCards(pairCount) {
         }
     }
 
-    // Добавляем обработчик события для каждой карты
     const cards = document.querySelectorAll('.card')
 
     for (const card of cards) {
@@ -140,6 +148,7 @@ export function renderCards(pairCount) {
       btn.addEventListener('click', function () {
         const popup = this.closest('.popup');
         popup.style.display = 'none';
+        renderChoosePage()
       });
     });
 }

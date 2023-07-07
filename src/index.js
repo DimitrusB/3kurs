@@ -1,5 +1,6 @@
 import { renderCards } from './pagecards.js'
 
+export let level = null
 export const renderChoosePage = () => {
     const appEl = document.getElementById('app')
 
@@ -32,19 +33,23 @@ export const renderChoosePage = () => {
     const middleLevel = document.getElementById('option2')
     const hardLevel = document.getElementById('option3')
     const chooseButton = document.getElementById('chooseButton')
-
+    
+    
     chooseButton.addEventListener('click', (event) => {
         event.preventDefault()
 
-        let level = ''
+       
 
         if (easyLevel.checked) {
             renderCards(3)
+            level = 3
         } else if (middleLevel.checked) {
             renderCards(6)
+            level = 6
         } else if (hardLevel.checked) {
             renderCards(9)
-        } else if (!level) {
+            level = 9
+        } else{
             alert('Выберите уровень сложности!!!')
             return
         }
