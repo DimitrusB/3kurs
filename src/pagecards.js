@@ -1,6 +1,6 @@
 import { level, renderChoosePage } from './index.js'
 import { timerSet } from './modulFunc.js'
-
+import { Timer, Time, TimerOptions } from 'timer-node';
 export function renderCards(pairCount) {
     const appEl = document.getElementById('app')
     const PageHtml = `
@@ -47,7 +47,8 @@ export function renderCards(pairCount) {
     }
 
     allCards.sort(() => Math.random() - 0.5)
-    let stoppedTime = 0
+    
+    
 
     let cardsHtml = '<div class="row">'
     for (let i = 0; i < allCards.length; i++) {
@@ -64,7 +65,7 @@ export function renderCards(pairCount) {
         <img src="./src/img/celebration.svg" alt="Win">
         <h3 class="popup-header">Вы выиграли!</h3>
         <p class="popup-text">Затраченное время:</p>
-        <p class="popup-text">${stoppedTime}</p>
+        <p class="popup-text"></p>
         <button class="popup__btn">Играть снова</button>
     </div>
     </div>
@@ -74,7 +75,7 @@ export function renderCards(pairCount) {
         <img src="./src/img/dead.svg" alt="Lose">
         <h3 class="popup-header">Вы проиграли!</h3>
         <p class="popup-text">Затраченное время:</p>
-        <p class="popup-text">${stoppedTime}</p>
+        <p class="popup-text"></p>
         <button class="popup__btn">Играть снова</button>
     </div>
     </div>`
@@ -85,10 +86,9 @@ export function renderCards(pairCount) {
     goBegin.addEventListener('click', () => {
         renderChoosePage()
     })
-
-    const myTimer = timerSet(document.getElementById('timer'))
-    timerSet(timer)
     
+    const myTimer = new Timer(document.getElementById('timer'))
+    myTimer.start()
     let firstCard = null
     let pairsFound = null
     
@@ -101,6 +101,7 @@ export function renderCards(pairCount) {
             return;
         }
 
+        
         if (!firstCard) {
             firstCard = card
             firstCard.classList.add('card-selected')
@@ -114,12 +115,18 @@ export function renderCards(pairCount) {
                     if (pairsFound === cards.length / 2) {
                         const popupWin = document.querySelector('#popup-win')
                         popupWin.style.display = 'block'
-                    }
+                        myTimer.stop();
+                        
+                        console.log(myTimer.format('[%m] минут [%s] секунд'))
+
+                                        }
                 } else {
                     const popupLose = document.querySelector('#popup-lose')
                     popupLose.style.display = 'block'
                     firstCard.classList.remove('card-selected')
                     secondCard.classList.remove('card-selected')
+                    myTimer.stop();
+                    console.log(myTimer.time());
                 }
                 firstCard = null
                 secondCard = null

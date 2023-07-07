@@ -22,6 +22,7 @@
     },
     "dependencies": {
         "eslint-config-prettier": "^8.8.0",
-        "eslint-plugin-prettier": "^4.2.1"
+        "eslint-plugin-prettier": "^4.2.1",
+        "timer-node": "^5.0.7"
     }
 }
