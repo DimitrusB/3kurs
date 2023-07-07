@@ -49,7 +49,7 @@ export function renderCards(pairCount) {
     allCards.sort(() => Math.random() - 0.5)
     
     
-
+    let timerValue=[]
     let cardsHtml = '<div class="row">'
     for (let i = 0; i < allCards.length; i++) {
         cardsHtml += `
@@ -65,7 +65,7 @@ export function renderCards(pairCount) {
         <img src="./src/img/celebration.svg" alt="Win">
         <h3 class="popup-header">Вы выиграли!</h3>
         <p class="popup-text">Затраченное время:</p>
-        <p class="popup-text"></p>
+        <p class="popup-text">${timerValue}</p>
         <button class="popup__btn">Играть снова</button>
     </div>
     </div>
@@ -75,7 +75,7 @@ export function renderCards(pairCount) {
         <img src="./src/img/dead.svg" alt="Lose">
         <h3 class="popup-header">Вы проиграли!</h3>
         <p class="popup-text">Затраченное время:</p>
-        <p class="popup-text"></p>
+        <p class="popup-text">${timerValue}</p>
         <button class="popup__btn">Играть снова</button>
     </div>
     </div>`
@@ -89,9 +89,12 @@ export function renderCards(pairCount) {
     
     const myTimer = new Timer(document.getElementById('timer'))
     myTimer.start()
+
     let firstCard = null
     let pairsFound = null
+
     
+    console.log(timerValue);
     // Функция, которая будет запускаться при клике на карту
     function clickCardHandler(event) {
         
@@ -116,8 +119,8 @@ export function renderCards(pairCount) {
                         const popupWin = document.querySelector('#popup-win')
                         popupWin.style.display = 'block'
                         myTimer.stop();
-                        
-                        console.log(myTimer.format('[%m] минут [%s] секунд'))
+                        timerValue = myTimer.time();
+                        console.log(timerValue);
 
                                         }
                 } else {
@@ -126,7 +129,8 @@ export function renderCards(pairCount) {
                     firstCard.classList.remove('card-selected')
                     secondCard.classList.remove('card-selected')
                     myTimer.stop();
-                    console.log(myTimer.time());
+                    timerValue = myTimer.time();
+                    console.log(timerValue);
                 }
                 firstCard = null
                 secondCard = null
