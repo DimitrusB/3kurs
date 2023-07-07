@@ -48,7 +48,7 @@ export function renderCards(pairCount) {
 
     allCards.sort(() => Math.random() - 0.5)
     let stoppedTime = 0
-    console.log(allCards)
+
     let cardsHtml = '<div class="row">'
     for (let i = 0; i < allCards.length; i++) {
         cardsHtml += `
@@ -77,16 +77,12 @@ export function renderCards(pairCount) {
         <p class="popup-text">${stoppedTime}</p>
         <button class="popup__btn">Играть снова</button>
     </div>
-    </div>
-    <button class="game_butt_down" id="chooseLevel">Выбрать уровень</button>`
+    </div>`
+
     document.querySelector('.card-deck').innerHTML = cardsHtml
 
     const goBegin = document.getElementById('startGame')
     goBegin.addEventListener('click', () => {
-        renderCards(level)
-    })
-    const chooseLevel = document.getElementById('chooseLevel')
-    chooseLevel.addEventListener('click', () => {
         renderChoosePage()
     })
 
@@ -94,12 +90,11 @@ export function renderCards(pairCount) {
     timerSet(timer)
     
     let firstCard = null
-    let pairsFound = 0
+    let pairsFound = null
     
     // Функция, которая будет запускаться при клике на карту
     function clickCardHandler(event) {
         
-        const stoppedTime = myTimer.stopTimer()
         const card = event.target.closest('.card')
 
         if (card.classList.contains('card-paired')) {
@@ -119,21 +114,19 @@ export function renderCards(pairCount) {
                     if (pairsFound === cards.length / 2) {
                         const popupWin = document.querySelector('#popup-win')
                         popupWin.style.display = 'block'
-                        myTimer.stopTimer()
                     }
                 } else {
                     const popupLose = document.querySelector('#popup-lose')
                     popupLose.style.display = 'block'
                     firstCard.classList.remove('card-selected')
                     secondCard.classList.remove('card-selected')
-                    myTimer.stopTimer()
                 }
                 firstCard = null
                 secondCard = null
             } else {
                 firstCard = card
                 firstCard.classList.add('card-selected')
-                stoppedTime = myTimer.stopTimer()
+
             }
         }
     }
@@ -148,7 +141,7 @@ export function renderCards(pairCount) {
       btn.addEventListener('click', function () {
         const popup = this.closest('.popup');
         popup.style.display = 'none';
-        renderChoosePage()
+        renderCards(level)
       });
     });
 }
