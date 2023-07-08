@@ -1,6 +1,8 @@
 import { level, renderChoosePage } from './index.js'
 import { timerSet } from './modulFunc.js'
 import { Timer, Time, TimerOptions } from 'timer-node'
+
+
 export function renderCards(pairCount) {
     const appEl = document.getElementById('app')
     const PageHtml = `
@@ -57,14 +59,14 @@ export function renderCards(pairCount) {
 
     allCards.sort(() => Math.random() - 0.5)
 
-    let backHtml = '<div class="row">'
-    for (let i = 0; i < allCards.length; i++) {
-        backHtml += `<div class="card-back">${
-            backCards[i % backCards.length].suit
-        }</div>`
-    }
-    backHtml += `</div>`
-    document.querySelector('.card-back').innerHTML = backHtml
+    // let backHtml = '<div class="row">'
+    // for (let i = 0; i < allCards.length; i++) {
+    //     backHtml += `<div class="card-back">${
+    //         backCards[i % backCards.length].suit
+    //     }</div>`
+    // }
+    // backHtml += `</div>`
+    // document.querySelector('.card-back').innerHTML = backHtml
 
     let cardsHtml = '<div class="row">'
     for (let i = 0; i < allCards.length; i++) {
@@ -95,7 +97,24 @@ export function renderCards(pairCount) {
         <button class="popup__btn">Играть снова</button>
     </div>
     </div>`
+    let selectedCards = [];
+    function changeCardStyle() {
+        const cardFrontElements = document.querySelectorAll('.card');
 
+        cardFrontElements.forEach((cardFrontElement) => {
+            cardFrontElement
+                .querySelectorAll(
+                    '.center__suit, .symbol-top-left, .symbol-bottom-right'
+                )
+                .forEach((element) => {
+                    element.style.display = 'none';
+                });
+            cardFrontElement.classList.add('selected');
+            selectedCards = [];
+        });
+    }
+
+    setTimeout(changeCardStyle, 5000);
     document.querySelector('.card-deck').innerHTML = cardsHtml
 
     const goBegin = document.getElementById('startGame')
@@ -106,14 +125,13 @@ export function renderCards(pairCount) {
     let firstCard = null
     let pairsFound = null
 
-
-
     // Функция, которая будет запускаться при клике на карту
     function clickCardHandler(event) {
+
         const card = event.target.closest('.card')
         let timeValue = myTimer.format('%m.%s')
 
-        console.log(timeValue <10 ? '0' + timeValue : timeValue )
+
 
         if (card.classList.contains('card-paired')) {
             return
@@ -166,7 +184,9 @@ export function renderCards(pairCount) {
         btn.addEventListener('click', function () {
             const popup = this.closest('.popup')
             popup.style.display = 'none'
+            selectedCards = [];
             renderCards(level)
+
         })
     })
 }

@@ -319,4 +319,9 @@ body {
   font-style: normal;
   font-weight: 400;
   line-height: 72px;
+}
+
+.selected {
+  color: transparent;
+  background-image: url(./src/img/back.jpg);
 }/*# sourceMappingURL=style.css.map */
