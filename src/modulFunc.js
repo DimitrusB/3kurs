@@ -1,3 +1,5 @@
+import clickCardHandler from "./pagecards"
+
 export function timerSet(timer) {
     let time = 0
 
@@ -24,3 +26,4 @@ export function timerSet(timer) {
         stopTimer: stopTimer
     }
 }
+
