@@ -1,9 +1,9 @@
 import { level, renderChoosePage } from './index.js'
-import { timerSet } from './modulFunc.js'
+import { changeCardStyle, showAllCards, timerSet } from './modulFunc.js'
 import { Timer, Time, TimerOptions } from 'timer-node'
 
-
 export function renderCards(pairCount) {
+    const myTimer = new Timer()
     const appEl = document.getElementById('app')
     const PageHtml = `
         <div class="center__second">
@@ -20,10 +20,9 @@ export function renderCards(pairCount) {
                 <div class="card-deck"></div>  
             </div>
            
-        </div>
-        
-    `
-    const myTimer = new Timer({ format: '%label [%m] минут [%s] секунд' })
+        </div>`
+    const width = pairCount === 3 ? '400px' : pairCount === 6 ? '650px' : 'auto'
+
     appEl.innerHTML = PageHtml
     const timer = document.getElementById('timer')
     timerSet(timer)
@@ -40,35 +39,16 @@ export function renderCards(pairCount) {
         }
     }
 
-    const backCards = Array.from({ length: 36 }, () => ({
-        suit: '<img src="./src/img/back.jpg" style="border-radius: 4px;">',
-        value: 'backShirt',
-    }))
-
     const allCards = []
     for (let i = 0; i < pairCount; i++) {
-        const randomCard =
-            deck[
-                (Math.floor(Math.random() * deck.length),
-                Math.floor(Math.random() * backCards.length))
-            ]
+        const randomCard = deck[Math.floor(Math.random() * deck.length)]
         allCards.push(randomCard)
         allCards.push(randomCard)
-        console.log(randomCard)
     }
 
     allCards.sort(() => Math.random() - 0.5)
 
-    // let backHtml = '<div class="row">'
-    // for (let i = 0; i < allCards.length; i++) {
-    //     backHtml += `<div class="card-back">${
-    //         backCards[i % backCards.length].suit
-    //     }</div>`
-    // }
-    // backHtml += `</div>`
-    // document.querySelector('.card-back').innerHTML = backHtml
-
-    let cardsHtml = '<div class="row">'
+    let cardsHtml = `<div class="row" style="width: ${width}" >`
     for (let i = 0; i < allCards.length; i++) {
         cardsHtml += `
             <div class="card ${allCards[i].rank}" data-suit ="${allCards[i].suit}"data-rank="${allCards[i].rank}">
@@ -97,24 +77,8 @@ export function renderCards(pairCount) {
         <button class="popup__btn">Играть снова</button>
     </div>
     </div>`
-    let selectedCards = [];
-    function changeCardStyle() {
-        const cardFrontElements = document.querySelectorAll('.card');
 
-        cardFrontElements.forEach((cardFrontElement) => {
-            cardFrontElement
-                .querySelectorAll(
-                    '.center__suit, .symbol-top-left, .symbol-bottom-right'
-                )
-                .forEach((element) => {
-                    element.style.display = 'none';
-                });
-            cardFrontElement.classList.add('selected');
-            selectedCards = [];
-        });
-    }
-
-    setTimeout(changeCardStyle, 5000);
+    setTimeout(changeCardStyle, 5000)
     document.querySelector('.card-deck').innerHTML = cardsHtml
 
     const goBegin = document.getElementById('startGame')
@@ -125,15 +89,15 @@ export function renderCards(pairCount) {
     let firstCard = null
     let pairsFound = null
 
-    // Функция, которая будет запускаться при клике на карту
     function clickCardHandler(event) {
-
         const card = event.target.closest('.card')
         let timeValue = myTimer.format('%m.%s')
 
-
-
-        if (card.classList.contains('card-paired')) {
+        if (
+            !card.classList.contains('selected') ||
+            card.classList.contains('card-selected') ||
+            card.classList.contains('card-paired')
+        ) {
             return
         }
         myTimer.start()
@@ -163,6 +127,7 @@ export function renderCards(pairCount) {
                     popupLose.style.display = 'block'
                     firstCard.classList.remove('card-selected')
                     secondCard.classList.remove('card-selected')
+                    showAllCards()
                     document.getElementById('timeLose').innerHTML = timeValue
                 }
                 firstCard = null
@@ -179,14 +144,13 @@ export function renderCards(pairCount) {
     for (const card of cards) {
         card.addEventListener('click', clickCardHandler)
     }
+
     const popupCloseBtns = document.querySelectorAll('.popup__btn')
     popupCloseBtns.forEach(function (btn) {
         btn.addEventListener('click', function () {
             const popup = this.closest('.popup')
             popup.style.display = 'none'
-            selectedCards = [];
             renderCards(level)
-
         })
     })
 }

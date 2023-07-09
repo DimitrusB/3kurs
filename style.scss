@@ -168,6 +168,7 @@ body {
     gap: 15px;
     margin-top: 35px;
     flex-direction: row;
+    width: 400px;
 }
 .second {
     position: absolute;
@@ -207,6 +208,12 @@ body {
     flex-direction: column;
     justify-content: space-between;
     padding: 5px 8px;
+}
+.card-deck{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 .symbol-top-right,
 .symbol-bottom-left {
@@ -248,6 +255,7 @@ body {
     position: absolute;
     margin-top: 130px;
     left: 50%;
+    top: 50%;
     transform: translate(-50%, -50%);
     z-index: 1;
 }
@@ -259,7 +267,6 @@ body {
     transform: translate(-50%, -50%);
      border-radius: 12px;
     background: #C2F5FF;
-    padding: 20px;
     text-align: center;
     width: 480px;
     height: 459px;

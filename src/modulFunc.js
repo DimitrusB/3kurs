@@ -1,5 +1,3 @@
-import clickCardHandler from "./pagecards"
-
 export function timerSet(timer) {
     let time = 0
 
@@ -25,5 +23,42 @@ export function timerSet(timer) {
     return {
         stopTimer: stopTimer
     }
+
 }
 
+export function showAllCards() {
+    const cardFrontElements = document.querySelectorAll('.card');
+    cardFrontElements.forEach((cardFrontElement) => {
+        cardFrontElement.classList.remove('selected');
+        cardFrontElement
+            .querySelectorAll(
+                '.center__suit, .symbol-top-left, .symbol-bottom-right'
+            )
+            .forEach((element) => {
+                element.style.display = 'block';
+            });
+    });
+}
+export function changeCardStyle() {
+    const cardFrontElements = document.querySelectorAll('.card');
+
+    cardFrontElements.forEach((cardFrontElement) => {
+        cardFrontElement
+            .querySelectorAll('.center__suit, .symbol-top-left, .symbol-bottom-right')
+            .forEach((element) => {
+                element.style.display = 'none';
+            });
+
+        cardFrontElement.classList.add('selected');
+
+        cardFrontElement.addEventListener('click', () => {
+            cardFrontElement
+                .querySelectorAll('.center__suit, .symbol-top-left, .symbol-bottom-right')
+                .forEach((element) => {
+                    element.style.display = ''; 
+                });
+
+            cardFrontElement.classList.remove('selected');
+        });
+    });
+}

@@ -176,6 +176,8 @@ body {
   gap: 15px;
   margin-top: 35px;
   flex-direction: row;
+  width: ;
+
 }
 
 .second {
@@ -220,6 +222,13 @@ body {
   padding: 5px 8px;
 }
 
+.card-deck {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .symbol-top-right,
 .symbol-bottom-left {
   font-size: 12px;
@@ -253,19 +262,20 @@ body {
   transform: scale(4.3);
 }
 
-.card-selected {
+/* .card-selected {
   box-shadow: 10px 5px 5px red;
 }
 
 .card-paired {
-  box-shadow: 10px 5px 5px green;
-}
+
+} */
 
 .popup {
   display: none;
   position: absolute;
   margin-top: 130px;
   left: 50%;
+  top: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;
 }
@@ -277,7 +287,6 @@ body {
   transform: translate(-50%, -50%);
   border-radius: 12px;
   background: #C2F5FF;
-  padding: 20px;
   text-align: center;
   width: 480px;
   height: 459px;
