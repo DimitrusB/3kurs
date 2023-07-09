@@ -176,8 +176,7 @@ body {
   gap: 15px;
   margin-top: 35px;
   flex-direction: row;
-  width: ;
-
+  width: 400px;
 }
 
 .second {
@@ -261,14 +260,6 @@ body {
 .center__suit img {
   transform: scale(4.3);
 }
-
-/* .card-selected {
-  box-shadow: 10px 5px 5px red;
-}
-
-.card-paired {
-
-} */
 
 .popup {
   display: none;

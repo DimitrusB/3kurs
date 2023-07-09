@@ -21,44 +21,47 @@ export function timerSet(timer) {
     }
 
     return {
-        stopTimer: stopTimer
+        stopTimer: stopTimer,
     }
-
 }
 
 export function showAllCards() {
-    const cardFrontElements = document.querySelectorAll('.card');
+    const cardFrontElements = document.querySelectorAll('.card')
     cardFrontElements.forEach((cardFrontElement) => {
-        cardFrontElement.classList.remove('selected');
+        cardFrontElement.classList.remove('selected')
         cardFrontElement
             .querySelectorAll(
                 '.center__suit, .symbol-top-left, .symbol-bottom-right'
             )
             .forEach((element) => {
-                element.style.display = 'block';
-            });
-    });
+                element.style.display = 'block'
+            })
+    })
 }
 export function changeCardStyle() {
-    const cardFrontElements = document.querySelectorAll('.card');
+    const cardFrontElements = document.querySelectorAll('.card')
 
     cardFrontElements.forEach((cardFrontElement) => {
         cardFrontElement
-            .querySelectorAll('.center__suit, .symbol-top-left, .symbol-bottom-right')
+            .querySelectorAll(
+                '.center__suit, .symbol-top-left, .symbol-bottom-right'
+            )
             .forEach((element) => {
-                element.style.display = 'none';
-            });
+                element.style.display = 'none'
+            })
 
-        cardFrontElement.classList.add('selected');
+        cardFrontElement.classList.add('selected')
 
         cardFrontElement.addEventListener('click', () => {
             cardFrontElement
-                .querySelectorAll('.center__suit, .symbol-top-left, .symbol-bottom-right')
+                .querySelectorAll(
+                    '.center__suit, .symbol-top-left, .symbol-bottom-right'
+                )
                 .forEach((element) => {
-                    element.style.display = ''; 
-                });
+                    element.style.display = ''
+                })
 
-            cardFrontElement.classList.remove('selected');
-        });
-    });
+            cardFrontElement.classList.remove('selected')
+        })
+    })
 }
