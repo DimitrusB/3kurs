@@ -2,7 +2,7 @@ import { level, renderChoosePage } from './index.js'
 import { changeCardStyle, showAllCards, timerSet } from './modulFunc.js'
 import { Timer, Time, TimerOptions } from 'timer-node'
 
-export function renderCards(pairCount) {
+export function renderCards(pairCount:number) {
     const myTimer = new Timer()
     const appEl = document.getElementById('app') as HTMLInputElement
     const PageHtml = `
@@ -82,6 +82,7 @@ export function renderCards(pairCount) {
     </div>
     </div>`
 
+    // @ts-ignore
     setTimeout(changeCardStyle, 5000)
     (document.querySelector('.card-deck') as HTMLDivElement).innerHTML = cardsHtml
 
@@ -90,10 +91,10 @@ export function renderCards(pairCount) {
         renderChoosePage()
     })
 
-    let firstCard = null
-    let pairsFound = null
+    let firstCard:null = null
+    let pairsFound:null = null
 
-    function clickCardHandler(event) {
+    function clickCardHandler(event: any) {
         const card = event.target.closest('.card')
         let timeValue = myTimer.format('%m.%s')
 
