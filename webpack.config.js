@@ -7,14 +7,19 @@ const webpack = require('webpack')
 
 
 module.exports = {
-    entry: ['./src/index.js', './style.css', './style.scss'],
+    entry: ['./src/index.ts', './style.css', './style.scss'],
     mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
     resolve: {
-        extensions: ['.js', '.css'],
+        extensions: ['.ts', '.js', '.css'],
      },
     module: {
 
         rules: [
+            {
+                test: /\.ts$/,
+                use: "ts-loader",
+                exclude: /node_modules/,
+              },
             {
                 test: /\.(scss|css)$/,
                 use: [MiniCssExtractPlugin.loader, 'css-loader'],

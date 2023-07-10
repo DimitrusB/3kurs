@@ -4,7 +4,7 @@ import { Timer, Time, TimerOptions } from 'timer-node'
 
 export function renderCards(pairCount) {
     const myTimer = new Timer()
-    const appEl = document.getElementById('app')
+    const appEl = document.getElementById('app') as HTMLInputElement
     const PageHtml = `
         <div class="center__second">
             <div class="second__main">
@@ -19,27 +19,29 @@ export function renderCards(pairCount) {
                 <div class="card-back"></div>
                 <div class="card-deck"></div>  
             </div>
-           
         </div>`
     const width = pairCount === 3 ? '400px' : pairCount === 6 ? '650px' : 'auto'
 
     appEl.innerHTML = PageHtml
     const timer = document.getElementById('timer')
     timerSet(timer)
-    const suits = ['clubs', 'diamonds', 'hearts', 'spades']
-    const ranks = ['6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
+    const suits: Array<string> = ['clubs', 'diamonds', 'hearts', 'spades']
+    const ranks: Array<string> = ['6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
+    
 
-    const deck = []
+    const deck: { suit: string; rank: string }[] = []
+
     for (let i = 0; i < suits.length; i++) {
         for (let j = 0; j < ranks.length; j++) {
-            deck.push({
-                suit: suits[i],
-                rank: ranks[j],
+            deck.push ({
+                suit:  suits[i],
+                rank:  ranks[j],
             })
+
         }
     }
 
-    const allCards = []
+    const allCards:{ suit: string; rank: string }[] = []
     for (let i = 0; i < pairCount; i++) {
         const randomCard = deck[Math.floor(Math.random() * deck.length)]
         allCards.push(randomCard)
@@ -81,9 +83,9 @@ export function renderCards(pairCount) {
     </div>`
 
     setTimeout(changeCardStyle, 5000)
-    document.querySelector('.card-deck').innerHTML = cardsHtml
+    (document.querySelector('.card-deck') as HTMLDivElement).innerHTML = cardsHtml
 
-    const goBegin = document.getElementById('startGame')
+    const goBegin = document.getElementById('startGame') as HTMLInputElement
     goBegin.addEventListener('click', () => {
         renderChoosePage()
     })
@@ -119,12 +121,14 @@ export function renderCards(pairCount) {
                     pairsFound++
                     if (pairsFound === cards.length / 2) {
                         myTimer.stop()
-                        document.querySelector('#popup-win').style.display = 'block'
+                        document.querySelector('#popup-win').style.display =
+                            'block'
                         document.getElementById('timeWin').innerHTML = timeValue
                     }
                 } else {
                     myTimer.stop()
-                    document.querySelector('#popup-lose').style.display = 'block'
+                    document.querySelector('#popup-lose').style.display =
+                        'block'
                     showAllCards()
                     document.getElementById('timeLose').innerHTML = timeValue
                 }
@@ -137,13 +141,13 @@ export function renderCards(pairCount) {
         }
     }
 
-    const cards = document.querySelectorAll('.card')
+    const cards = document.querySelectorAll('.card') 
 
     for (const card of cards) {
         card.addEventListener('click', clickCardHandler)
     }
 
-    const popupCloseBtns = document.querySelectorAll('.popup__btn')
+    const popupCloseBtns = document.querySelectorAll('.popup__btn') 
     popupCloseBtns.forEach(function (btn) {
         btn.addEventListener('click', function () {
             const popup = this.closest('.popup')
