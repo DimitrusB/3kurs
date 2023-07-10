@@ -65,3 +65,52 @@ export function changeCardStyle() {
         })
     })
 }
+    function clickCardHandler(event) {
+        const card = event.target.closest('.card')
+        let timeValue = myTimer.format('%m.%s')
+
+        if (
+            !card.classList.contains('selected') ||
+            card.classList.contains('card-selected') ||
+            card.classList.contains('card-paired')
+        ) {
+            return
+        }
+        myTimer.start()
+
+        if (!firstCard) {
+            firstCard = card
+            firstCard.classList.add('card-selected')
+        } else {
+            let secondCard = card
+            if (firstCard && secondCard) {
+                if (
+                    firstCard.dataset.rank === secondCard.dataset.rank &&
+                    firstCard.dataset.suit === secondCard.dataset.suit
+                ) {
+                    firstCard.classList.add('card-paired')
+                    secondCard.classList.add('card-paired')
+                    pairsFound++
+                    if (pairsFound === cards.length / 2) {
+                        myTimer.stop()
+                        const popupWin = document.querySelector('#popup-win')
+                        popupWin.style.display = 'block'
+                        document.getElementById('timeWin').innerHTML = timeValue
+                    }
+                } else {
+                    myTimer.stop()
+                    const popupLose = document.querySelector('#popup-lose')
+                    popupLose.style.display = 'block'
+                    firstCard.classList.remove('card-selected')
+                    secondCard.classList.remove('card-selected')
+                    showAllCards()
+                    document.getElementById('timeLose').innerHTML = timeValue
+                }
+                firstCard = null
+                secondCard = null
+            } else {
+                firstCard = card
+                firstCard.classList.add('card-selected')
+            }
+        }
+    }

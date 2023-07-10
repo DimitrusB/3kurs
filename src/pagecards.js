@@ -60,7 +60,8 @@ export function renderCards(pairCount) {
     cardsHtml += '</div>'
     cardsHtml += `<div class="popup" id="popup-win">
     <div class="popup-content">
-        <img src="./src/img/celebration.svg" alt="Win">
+        <img src="./src/img/celebration.svg" alt="Win" style="
+        padding-top: 26px">
         <h3 class="popup-header">Вы выиграли!</h3>
         <p class="popup-text">Затраченное время:</p>
         <p class="popup-time" id="timeWin"></p>
@@ -70,7 +71,8 @@ export function renderCards(pairCount) {
 
     <div class="popup" id="popup-lose">
     <div class="popup-content">
-        <img src="./src/img/dead.svg" alt="Lose">
+        <img src="./src/img/dead.svg" alt="Lose" style="
+        padding-top: 26px">
         <h3 class="popup-header">Вы проиграли!</h3>
         <p class="popup-text">Затраченное время:</p>
         <p class="popup-time" id="timeLose"></p>
@@ -117,16 +119,12 @@ export function renderCards(pairCount) {
                     pairsFound++
                     if (pairsFound === cards.length / 2) {
                         myTimer.stop()
-                        const popupWin = document.querySelector('#popup-win')
-                        popupWin.style.display = 'block'
+                        document.querySelector('#popup-win').style.display = 'block'
                         document.getElementById('timeWin').innerHTML = timeValue
                     }
                 } else {
                     myTimer.stop()
-                    const popupLose = document.querySelector('#popup-lose')
-                    popupLose.style.display = 'block'
-                    firstCard.classList.remove('card-selected')
-                    secondCard.classList.remove('card-selected')
+                    document.querySelector('#popup-lose').style.display = 'block'
                     showAllCards()
                     document.getElementById('timeLose').innerHTML = timeValue
                 }
