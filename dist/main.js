@@ -471,8 +471,10 @@ function renderCards(pairCount) {
     }
     cardsHtml += '</div>';
     cardsHtml += "<div class=\"popup\" id=\"popup-win\">\n    <div class=\"popup-content\">\n        <img src=\"./src/img/celebration.svg\" alt=\"Win\" style=\"\n        padding-top: 26px\">\n        <h3 class=\"popup-header\">\u0412\u044B \u0432\u044B\u0438\u0433\u0440\u0430\u043B\u0438!</h3>\n        <p class=\"popup-text\">\u0417\u0430\u0442\u0440\u0430\u0447\u0435\u043D\u043D\u043E\u0435 \u0432\u0440\u0435\u043C\u044F:</p>\n        <p class=\"popup-time\" id=\"timeWin\"></p>\n        <button class=\"popup__btn\">\u0418\u0433\u0440\u0430\u0442\u044C \u0441\u043D\u043E\u0432\u0430</button>\n    </div>\n    </div>\n\n    <div class=\"popup\" id=\"popup-lose\">\n    <div class=\"popup-content\">\n        <img src=\"./src/img/dead.svg\" alt=\"Lose\" style=\"\n        padding-top: 26px\">\n        <h3 class=\"popup-header\">\u0412\u044B \u043F\u0440\u043E\u0438\u0433\u0440\u0430\u043B\u0438!</h3>\n        <p class=\"popup-text\">\u0417\u0430\u0442\u0440\u0430\u0447\u0435\u043D\u043D\u043E\u0435 \u0432\u0440\u0435\u043C\u044F:</p>\n        <p class=\"popup-time\" id=\"timeLose\"></p>\n        <button class=\"popup__btn\">\u0418\u0433\u0440\u0430\u0442\u044C \u0441\u043D\u043E\u0432\u0430</button>\n    </div>\n    </div>";
-    // @ts-ignore
-    setTimeout(_modulFunc__WEBPACK_IMPORTED_MODULE_1__.changeCardStyle, 5000)(document.querySelector('.card-deck')).innerHTML = cardsHtml;
+    setTimeout(function () {
+        (0,_modulFunc__WEBPACK_IMPORTED_MODULE_1__.changeCardStyle)();
+    }, 5000);
+    document.querySelector('.card-deck').innerHTML = cardsHtml;
     var goBegin = document.getElementById('startGame');
     goBegin.addEventListener('click', function () {
         (0,_index__WEBPACK_IMPORTED_MODULE_0__.renderChoosePage)();

@@ -84,7 +84,9 @@ export function renderCards(pairCount:number) {
     </div>`
 
     
-    function  setTimeout(changeCardStyle: ()=> void, 5000)
+   setTimeout(function() {
+  changeCardStyle();
+}, 5000);
 
     (document.querySelector('.card-deck') as HTMLDivElement).innerHTML = cardsHtml
 
