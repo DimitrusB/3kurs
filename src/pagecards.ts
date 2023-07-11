@@ -132,6 +132,7 @@ export function renderCards(pairCount: number) {
                         ;(
                             document.getElementById('timeWin') as HTMLDivElement
                         ).innerHTML = timeValue
+                        goBegin.disabled=true
                     }
                 } else {
                     // myTimer.stop()
@@ -143,6 +144,7 @@ export function renderCards(pairCount: number) {
                     ;(
                         document.getElementById('timeLose') as HTMLDivElement
                     ).innerHTML = timeValue
+                    goBegin.disabled=true
                 }
                 firstCard = null
                 secondCard = null
@@ -170,6 +172,7 @@ export function renderCards(pairCount: number) {
             function (this: HTMLButtonElement, event: MouseEvent) {
                 const popup = this.closest('.popup') as HTMLElement
                 popup.style.display = 'none'
+                goBegin.disabled=false
                 renderCards(pairCount)
             }
         )
