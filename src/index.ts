@@ -1,4 +1,4 @@
-import { renderCards } from './pagecards.js'
+import { renderCards } from './pagecards'
 
 export let level = null
 export const renderChoosePage = () => {

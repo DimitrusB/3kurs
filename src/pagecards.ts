@@ -1,10 +1,11 @@
-import { level, renderChoosePage } from './index.js'
-import { changeCardStyle, showAllCards, timerSet } from './modulFunc.js'
-import { Timer, Time, TimerOptions } from 'timer-node'
+import { level, renderChoosePage } from './index'
+import { changeCardStyle, showAllCards, timerSet } from './modulFunc'
+import  { Timer, Time, TimerOptions } from 'timer-node'
 
 export function renderCards(pairCount:number) {
+
     const myTimer = new Timer()
-    const appEl = document.getElementById('app') as HTMLInputElement
+    const appEl = document.getElementById('app') as HTMLElement
     const PageHtml = `
         <div class="center__second">
             <div class="second__main">
@@ -82,8 +83,9 @@ export function renderCards(pairCount:number) {
     </div>
     </div>`
 
-    // @ts-ignore
-    setTimeout(changeCardStyle, 5000)
+    
+    function  setTimeout(changeCardStyle: ()=> void, 5000)
+
     (document.querySelector('.card-deck') as HTMLDivElement).innerHTML = cardsHtml
 
     const goBegin = document.getElementById('startGame') as HTMLInputElement
@@ -91,8 +93,8 @@ export function renderCards(pairCount:number) {
         renderChoosePage()
     })
 
-    let firstCard:null = null
-    let pairsFound:null = null
+    let firstCard:any = null
+    let pairsFound:any = null
 
     function clickCardHandler(event: any) {
         const card = event.target.closest('.card')
@@ -105,6 +107,7 @@ export function renderCards(pairCount:number) {
         ) {
             return
         }
+
         myTimer.start()
 
         if (!firstCard) {
@@ -121,17 +124,20 @@ export function renderCards(pairCount:number) {
                     secondCard.classList.add('card-paired')
                     pairsFound++
                     if (pairsFound === cards.length / 2) {
+                        // @ts-ignore
                         myTimer.stop()
-                        document.querySelector('#popup-win').style.display =
-                            'block'
-                        document.getElementById('timeWin').innerHTML = timeValue
+                        (document.querySelector('#popup-win') as HTMLDivElement).style.display =
+                            'block' as String
+                        (document.getElementById('timeWin') as HTMLDivElement).innerHTML = timeValue
                     }
                 } else {
+                    // @ts-ignore
                     myTimer.stop()
-                    document.querySelector('#popup-lose').style.display =
+                    (document.querySelector('#popup-lose') as HTMLDivElement).style.display =
                         'block'
+                        // @ts-ignore
                     showAllCards()
-                    document.getElementById('timeLose').innerHTML = timeValue
+                    (document.getElementById('timeLose') as HTMLDivElement).innerHTML = timeValue
                 }
                 firstCard = null
                 secondCard = null
@@ -143,16 +149,17 @@ export function renderCards(pairCount:number) {
     }
 
     const cards = document.querySelectorAll('.card') 
-
+// @ts-ignore
     for (const card of cards) {
         card.addEventListener('click', clickCardHandler)
     }
 
-    const popupCloseBtns = document.querySelectorAll('.popup__btn') 
+    const popupCloseBtns = document.querySelectorAll('.popup__btn')
     popupCloseBtns.forEach(function (btn) {
-        btn.addEventListener('click', function () {
+        btn.addEventListener('click', function (this:any) {
             const popup = this.closest('.popup')
             popup.style.display = 'none'
+            // @ts-ignore
             renderCards(level)
         })
     })
