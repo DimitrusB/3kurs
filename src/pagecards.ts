@@ -1,10 +1,8 @@
-import { level, renderChoosePage } from './index'
+import { renderChoosePage } from './index'
 import { changeCardStyle, showAllCards, timerSet } from './modulFunc'
-import  { Timer, Time, TimerOptions } from 'timer-node'
+import { Timer, Time, TimerOptions } from 'timer-node'
 
-export function renderCards(pairCount:number) {
-
-    const { Timer } = require('timer-node')
+export function renderCards(pairCount: number) {
     const myTimer = new Timer()
     const appEl = document.getElementById('app') as HTMLElement
     const PageHtml = `
@@ -29,21 +27,19 @@ export function renderCards(pairCount:number) {
     timerSet(timer)
     const suits: Array<string> = ['clubs', 'diamonds', 'hearts', 'spades']
     const ranks: Array<string> = ['6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
-    
 
     const deck: { suit: string; rank: string }[] = []
 
     for (let i = 0; i < suits.length; i++) {
         for (let j = 0; j < ranks.length; j++) {
-            deck.push ({
-                suit:  suits[i],
-                rank:  ranks[j],
+            deck.push({
+                suit: suits[i],
+                rank: ranks[j],
             })
-
         }
     }
 
-    const allCards:{ suit: string; rank: string }[] = []
+    const allCards: { suit: string; rank: string }[] = []
     for (let i = 0; i < pairCount; i++) {
         const randomCard = deck[Math.floor(Math.random() * deck.length)]
         allCards.push(randomCard)
@@ -84,20 +80,19 @@ export function renderCards(pairCount:number) {
     </div>
     </div>`
 
-    
-   setTimeout(function() {
-  changeCardStyle();
-}, 5000);
+    setTimeout(function () {
+        changeCardStyle()
+    }, 5000);
 
-    (document.querySelector('.card-deck') as HTMLDivElement).innerHTML = cardsHtml
+    (document.querySelector('.card-deck') as HTMLDivElement).innerHTML =
+        cardsHtml
 
     const goBegin = document.getElementById('startGame') as HTMLInputElement
     goBegin.addEventListener('click', () => {
-        renderChoosePage()
+        location.reload();
     })
-    let level:any = null
-    let firstCard:any = null
-    let pairsFound:any = null
+    let firstCard: any = null
+    let pairsFound: any = null
 
     function clickCardHandler(event: any) {
         const card = event.target.closest('.card')
@@ -129,16 +124,25 @@ export function renderCards(pairCount:number) {
                     pairsFound++
                     if (pairsFound === cards.length / 2) {
                         // myTimer.stop()
-                        (document.querySelector('#popup-win') as HTMLDivElement).style.display = 'block';
-                        (document.getElementById('timeWin') as HTMLDivElement).innerHTML = timeValue;
+                        ;(
+                            document.querySelector(
+                                '#popup-win'
+                            ) as HTMLDivElement
+                        ).style.display = 'block'
+                        ;(
+                            document.getElementById('timeWin') as HTMLDivElement
+                        ).innerHTML = timeValue
                     }
                 } else {
                     // myTimer.stop()
-                    (document.querySelector('#popup-lose') as HTMLDivElement).style.display =
-                        'block'
+                    ;(
+                        document.querySelector('#popup-lose') as HTMLDivElement
+                    ).style.display = 'block'
 
-                    showAllCards();
-                    (document.getElementById('timeLose') as HTMLDivElement).innerHTML = timeValue
+                    showAllCards()
+                    ;(
+                        document.getElementById('timeLose') as HTMLDivElement
+                    ).innerHTML = timeValue
                 }
                 firstCard = null
                 secondCard = null
@@ -150,19 +154,24 @@ export function renderCards(pairCount:number) {
     }
 
     const cards: NodeListOf<Element> = document.querySelectorAll('.card')
-    const cardArray = Array.from(cards);
+    const cardArray = Array.from(cards)
 
     for (const card of cardArray) {
         card.addEventListener('click', clickCardHandler)
     }
 
-    const popupCloseBtns = document.querySelectorAll('.popup__btn') as NodeListOf<HTMLButtonElement>;
+    const popupCloseBtns = document.querySelectorAll(
+        '.popup__btn'
+    ) as NodeListOf<HTMLButtonElement>
 
     popupCloseBtns.forEach(function (btn) {
-       btn.addEventListener('click', function (this: HTMLButtonElement, event: MouseEvent) {
-          const popup = this.closest('.popup') as HTMLElement;
-          popup.style.display = 'none';
-          renderCards(level);
-       });
-    });
+        btn.addEventListener(
+            'click',
+            function (this: HTMLButtonElement, event: MouseEvent) {
+                const popup = this.closest('.popup') as HTMLElement
+                popup.style.display = 'none'
+                renderCards(pairCount)
+            }
+        )
+    })
 }

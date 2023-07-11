@@ -1,32 +1,6 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./style.css":
-/*!*******************!*\
-  !*** ./style.css ***!
-  \*******************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./style.scss":
-/*!********************!*\
-  !*** ./style.scss ***!
-  \********************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
 /***/ "./node_modules/timer-node/index.js":
 /*!******************************************!*\
   !*** ./node_modules/timer-node/index.js ***!
@@ -374,54 +348,6 @@ exports.Timer = Timer;
 
 /***/ }),
 
-/***/ "./src/index.ts":
-/*!**********************!*\
-  !*** ./src/index.ts ***!
-  \**********************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   level: () => (/* binding */ level),
-/* harmony export */   renderChoosePage: () => (/* binding */ renderChoosePage)
-/* harmony export */ });
-/* harmony import */ var _pagecards__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pagecards */ "./src/pagecards.ts");
-
-var level = null;
-var renderChoosePage = function () {
-    var appEl = document.getElementById('app');
-    var choosePageHtml = "\n    <div class=\"center\">\n    <div class=\"main__window\">\n        <div class=\"main__window_senc\">\n            <p>\u0412\u044B\u0431\u0435\u0440\u0438 \u0441\u043B\u043E\u0436\u043D\u043E\u0441\u0442\u044C</p>\n        </div>\n        <form class=\"main__window_form\">\n            <div  class=\"main__window_choose\">\n            <input type=\"radio\" id=\"option1\" name=\"options\" value=\"Option 1\" > \n            <label for=\"option1\">1</label>\n            </div>\n            <div  class=\"main__window_choose\">\n            <input type=\"radio\" id=\"option2\" name=\"options\" value=\"Option 2\" >\n            <label for=\"option2\">2</label>\n            </div>\n            <div  class=\"main__window_choose\">\n            <input type=\"radio\" id=\"option3\" name=\"options\" value=\"Option 3\">\n            <label for=\"option3\">3</label>\n            </div>\n        </form>\n            <button class=\"main__window_butt\" id=\"chooseButton\">\u0421\u0442\u0430\u0440\u0442</button>\n    </div>\n    ";
-    appEl.innerHTML = choosePageHtml;
-    var easyLevel = document.getElementById('option1');
-    var middleLevel = document.getElementById('option2');
-    var hardLevel = document.getElementById('option3');
-    var chooseButton = document.getElementById('chooseButton');
-    chooseButton.addEventListener('click', function (event) {
-        event.preventDefault();
-        if (easyLevel.checked) {
-            (0,_pagecards__WEBPACK_IMPORTED_MODULE_0__.renderCards)(3);
-            level === 3;
-        }
-        else if (middleLevel.checked) {
-            (0,_pagecards__WEBPACK_IMPORTED_MODULE_0__.renderCards)(6);
-            level === 6;
-        }
-        else if (hardLevel.checked) {
-            (0,_pagecards__WEBPACK_IMPORTED_MODULE_0__.renderCards)(9);
-            level === 9;
-        }
-        else {
-            alert('Выберите уровень сложности!!!');
-            return;
-        }
-    });
-};
-renderChoosePage();
-
-
-/***/ }),
-
 /***/ "./src/modulFunc.ts":
 /*!**************************!*\
   !*** ./src/modulFunc.ts ***!
@@ -501,19 +427,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   renderCards: () => (/* binding */ renderCards)
 /* harmony export */ });
-/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index */ "./src/index.ts");
-/* harmony import */ var _modulFunc__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modulFunc */ "./src/modulFunc.ts");
+/* harmony import */ var _modulFunc__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modulFunc */ "./src/modulFunc.ts");
+/* harmony import */ var timer_node__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! timer-node */ "./node_modules/timer-node/index.js");
 
 
 function renderCards(pairCount) {
-    var Timer = (__webpack_require__(/*! timer-node */ "./node_modules/timer-node/index.js").Timer);
-    var myTimer = new Timer();
+    var myTimer = new timer_node__WEBPACK_IMPORTED_MODULE_1__.Timer();
     var appEl = document.getElementById('app');
     var PageHtml = "\n        <div class=\"center__second\">\n            <div class=\"second__main\">\n                <div>\n                    <span class=\"timerMin\">min</span>\n                    <span class=\"timerSec\">sec</span>\n                    <div id=\"timer\" class=\"timer\">00:00</div>\n                </div>\n                <button class=\"game_butt\" id=\"startGame\">\u041D\u0430\u0447\u0430\u0442\u044C \u0437\u0430\u043D\u043E\u0432\u043E</button>\n            </div> \n            <div class=\"second\">\n                <div class=\"card-back\"></div>\n                <div class=\"card-deck\"></div>  \n            </div>\n        </div>";
     var width = pairCount === 3 ? '400px' : pairCount === 6 ? '650px' : 'auto';
     appEl.innerHTML = PageHtml;
     var timer = document.getElementById('timer');
-    (0,_modulFunc__WEBPACK_IMPORTED_MODULE_1__.timerSet)(timer);
+    (0,_modulFunc__WEBPACK_IMPORTED_MODULE_0__.timerSet)(timer);
     var suits = ['clubs', 'diamonds', 'hearts', 'spades'];
     var ranks = ['6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
     var deck = [];
@@ -539,14 +464,14 @@ function renderCards(pairCount) {
     cardsHtml += '</div>';
     cardsHtml += "<div class=\"popup\" id=\"popup-win\">\n    <div class=\"popup-content\">\n        <img src=\"./src/img/celebration.svg\" alt=\"Win\" style=\"\n        padding-top: 26px\">\n        <h3 class=\"popup-header\">\u0412\u044B \u0432\u044B\u0438\u0433\u0440\u0430\u043B\u0438!</h3>\n        <p class=\"popup-text\">\u0417\u0430\u0442\u0440\u0430\u0447\u0435\u043D\u043D\u043E\u0435 \u0432\u0440\u0435\u043C\u044F:</p>\n        <p class=\"popup-time\" id=\"timeWin\"></p>\n        <button class=\"popup__btn\">\u0418\u0433\u0440\u0430\u0442\u044C \u0441\u043D\u043E\u0432\u0430</button>\n    </div>\n    </div>\n\n    <div class=\"popup\" id=\"popup-lose\">\n    <div class=\"popup-content\">\n        <img src=\"./src/img/dead.svg\" alt=\"Lose\" style=\"\n        padding-top: 26px\">\n        <h3 class=\"popup-header\">\u0412\u044B \u043F\u0440\u043E\u0438\u0433\u0440\u0430\u043B\u0438!</h3>\n        <p class=\"popup-text\">\u0417\u0430\u0442\u0440\u0430\u0447\u0435\u043D\u043D\u043E\u0435 \u0432\u0440\u0435\u043C\u044F:</p>\n        <p class=\"popup-time\" id=\"timeLose\"></p>\n        <button class=\"popup__btn\">\u0418\u0433\u0440\u0430\u0442\u044C \u0441\u043D\u043E\u0432\u0430</button>\n    </div>\n    </div>";
     setTimeout(function () {
-        (0,_modulFunc__WEBPACK_IMPORTED_MODULE_1__.changeCardStyle)();
+        (0,_modulFunc__WEBPACK_IMPORTED_MODULE_0__.changeCardStyle)();
     }, 5000);
-    document.querySelector('.card-deck').innerHTML = cardsHtml;
+    document.querySelector('.card-deck').innerHTML =
+        cardsHtml;
     var goBegin = document.getElementById('startGame');
     goBegin.addEventListener('click', function () {
-        (0,_index__WEBPACK_IMPORTED_MODULE_0__.renderChoosePage)();
+        location.reload();
     });
-    var level = null;
     var firstCard = null;
     var pairsFound = null;
     function clickCardHandler(event) {
@@ -572,15 +497,17 @@ function renderCards(pairCount) {
                     secondCard.classList.add('card-paired');
                     pairsFound++;
                     if (pairsFound === cards.length / 2) {
-                        myTimer.pause()(document.querySelector('#popup-win')).style.display =
-                            'block';
+                        // myTimer.stop()
+                        ;
+                        document.querySelector('#popup-win').style.display = 'block';
                         document.getElementById('timeWin').innerHTML = timeValue;
                     }
                 }
                 else {
-                    myTimer.pause()(document.querySelector('#popup-lose')).style.display =
-                        'block';
-                    (0,_modulFunc__WEBPACK_IMPORTED_MODULE_1__.showAllCards)();
+                    // myTimer.stop()
+                    ;
+                    document.querySelector('#popup-lose').style.display = 'block';
+                    (0,_modulFunc__WEBPACK_IMPORTED_MODULE_0__.showAllCards)();
                     document.getElementById('timeLose').innerHTML = timeValue;
                 }
                 firstCard = null;
@@ -603,7 +530,7 @@ function renderCards(pairCount) {
         btn.addEventListener('click', function (event) {
             var popup = this.closest('.popup');
             popup.style.display = 'none';
-            renderCards(level);
+            renderCards(pairCount);
         });
     });
 }
@@ -667,14 +594,77 @@ function renderCards(pairCount) {
 /******/ 	})();
 /******/ 	
 /************************************************************************/
-/******/ 	
-/******/ 	// startup
-/******/ 	// Load entry module and return exports
-/******/ 	// This entry module is referenced by other modules so it can't be inlined
-/******/ 	__webpack_require__("./src/index.ts");
-/******/ 	__webpack_require__("./style.css");
-/******/ 	var __webpack_exports__ = __webpack_require__("./style.scss");
-/******/ 	
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+(() => {
+"use strict";
+var __webpack_exports__ = {};
+/*!**********************!*\
+  !*** ./src/index.ts ***!
+  \**********************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   level: () => (/* binding */ level),
+/* harmony export */   renderChoosePage: () => (/* binding */ renderChoosePage)
+/* harmony export */ });
+/* harmony import */ var _pagecards__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pagecards */ "./src/pagecards.ts");
+
+var level = null;
+var renderChoosePage = function () {
+    var appEl = document.getElementById('app');
+    var choosePageHtml = "\n    <div class=\"center\">\n    <div class=\"main__window\">\n        <div class=\"main__window_senc\">\n            <p>\u0412\u044B\u0431\u0435\u0440\u0438 \u0441\u043B\u043E\u0436\u043D\u043E\u0441\u0442\u044C</p>\n        </div>\n        <form class=\"main__window_form\">\n            <div  class=\"main__window_choose\">\n            <input type=\"radio\" id=\"option1\" name=\"options\" value=\"Option 1\" > \n            <label for=\"option1\">1</label>\n            </div>\n            <div  class=\"main__window_choose\">\n            <input type=\"radio\" id=\"option2\" name=\"options\" value=\"Option 2\" >\n            <label for=\"option2\">2</label>\n            </div>\n            <div  class=\"main__window_choose\">\n            <input type=\"radio\" id=\"option3\" name=\"options\" value=\"Option 3\">\n            <label for=\"option3\">3</label>\n            </div>\n        </form>\n            <button class=\"main__window_butt\" id=\"chooseButton\">\u0421\u0442\u0430\u0440\u0442</button>\n    </div>\n    ";
+    appEl.innerHTML = choosePageHtml;
+    var easyLevel = document.getElementById('option1');
+    var middleLevel = document.getElementById('option2');
+    var hardLevel = document.getElementById('option3');
+    var chooseButton = document.getElementById('chooseButton');
+    chooseButton.addEventListener('click', function (event) {
+        event.preventDefault();
+        if (easyLevel.checked) {
+            (0,_pagecards__WEBPACK_IMPORTED_MODULE_0__.renderCards)(3);
+            level === 3;
+        }
+        else if (middleLevel.checked) {
+            (0,_pagecards__WEBPACK_IMPORTED_MODULE_0__.renderCards)(6);
+            level === 6;
+        }
+        else if (hardLevel.checked) {
+            (0,_pagecards__WEBPACK_IMPORTED_MODULE_0__.renderCards)(9);
+            level === 9;
+        }
+        else {
+            alert('Выберите уровень сложности!!!');
+            return;
+        }
+    });
+};
+renderChoosePage();
+
+})();
+
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+(() => {
+"use strict";
+var __webpack_exports__ = {};
+/*!*******************!*\
+  !*** ./style.css ***!
+  \*******************/
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+})();
+
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+(() => {
+"use strict";
+/*!********************!*\
+  !*** ./style.scss ***!
+  \********************/
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+})();
+
 /******/ })()
 ;
 //# sourceMappingURL=main.js.map
