@@ -9,7 +9,7 @@ module.exports = {
     entry: ['./src/index.ts', './style.css', './style.scss'],
     mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
     resolve: {
-        extensions: ['.ts', '.js', '.css'],
+        extensions: ['.ts', '.js', '.css', '.scss'],
     },
     module: {
         rules: [

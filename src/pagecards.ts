@@ -4,6 +4,7 @@ import  { Timer, Time, TimerOptions } from 'timer-node'
 
 export function renderCards(pairCount:number) {
 
+    const { Timer } = require('timer-node')
     const myTimer = new Timer()
     const appEl = document.getElementById('app') as HTMLElement
     const PageHtml = `
@@ -24,7 +25,7 @@ export function renderCards(pairCount:number) {
     const width = pairCount === 3 ? '400px' : pairCount === 6 ? '650px' : 'auto'
 
     appEl.innerHTML = PageHtml
-    const timer = document.getElementById('timer')
+    const timer = document.getElementById('timer') as HTMLElement
     timerSet(timer)
     const suits: Array<string> = ['clubs', 'diamonds', 'hearts', 'spades']
     const ranks: Array<string> = ['6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
@@ -94,7 +95,7 @@ export function renderCards(pairCount:number) {
     goBegin.addEventListener('click', () => {
         renderChoosePage()
     })
-
+    let level:any = null
     let firstCard:any = null
     let pairsFound:any = null
 
@@ -111,6 +112,7 @@ export function renderCards(pairCount:number) {
         }
 
         myTimer.start()
+        console.log(myTimer.start())
 
         if (!firstCard) {
             firstCard = card
@@ -126,19 +128,16 @@ export function renderCards(pairCount:number) {
                     secondCard.classList.add('card-paired')
                     pairsFound++
                     if (pairsFound === cards.length / 2) {
-                        // @ts-ignore
-                        myTimer.stop()
-                        (document.querySelector('#popup-win') as HTMLDivElement).style.display =
-                            'block' as String
-                        (document.getElementById('timeWin') as HTMLDivElement).innerHTML = timeValue
+                        // myTimer.stop()
+                        (document.querySelector('#popup-win') as HTMLDivElement).style.display = 'block';
+                        (document.getElementById('timeWin') as HTMLDivElement).innerHTML = timeValue;
                     }
                 } else {
-                    // @ts-ignore
-                    myTimer.stop()
+                    // myTimer.stop()
                     (document.querySelector('#popup-lose') as HTMLDivElement).style.display =
                         'block'
-                        // @ts-ignore
-                    showAllCards()
+
+                    showAllCards();
                     (document.getElementById('timeLose') as HTMLDivElement).innerHTML = timeValue
                 }
                 firstCard = null
@@ -150,19 +149,20 @@ export function renderCards(pairCount:number) {
         }
     }
 
-    const cards = document.querySelectorAll('.card') 
-// @ts-ignore
-    for (const card of cards) {
+    const cards: NodeListOf<Element> = document.querySelectorAll('.card')
+    const cardArray = Array.from(cards);
+
+    for (const card of cardArray) {
         card.addEventListener('click', clickCardHandler)
     }
 
-    const popupCloseBtns = document.querySelectorAll('.popup__btn')
+    const popupCloseBtns = document.querySelectorAll('.popup__btn') as NodeListOf<HTMLButtonElement>;
+
     popupCloseBtns.forEach(function (btn) {
-        btn.addEventListener('click', function (this:any) {
-            const popup = this.closest('.popup')
-            popup.style.display = 'none'
-            // @ts-ignore
-            renderCards(level)
-        })
-    })
+       btn.addEventListener('click', function (this: HTMLButtonElement, event: MouseEvent) {
+          const popup = this.closest('.popup') as HTMLElement;
+          popup.style.display = 'none';
+          renderCards(level);
+       });
+    });
 }

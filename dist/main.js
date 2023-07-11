@@ -422,6 +422,74 @@ renderChoosePage();
 
 /***/ }),
 
+/***/ "./src/modulFunc.ts":
+/*!**************************!*\
+  !*** ./src/modulFunc.ts ***!
+  \**************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   changeCardStyle: () => (/* binding */ changeCardStyle),
+/* harmony export */   showAllCards: () => (/* binding */ showAllCards),
+/* harmony export */   timerSet: () => (/* binding */ timerSet)
+/* harmony export */ });
+function timerSet(timer) {
+    var time = 0;
+    function updateTime() {
+        time++;
+        var minutes = Math.floor(time / 60);
+        var seconds = Math.floor(time % 60);
+        var formattedTime = pad(minutes) + ':' + pad(seconds);
+        timer.textContent = formattedTime;
+    }
+    function pad(value) {
+        return value < 10 ? '0' + value : value.toString();
+    }
+    var timerInterval = setInterval(updateTime, 1000);
+    function stopTimer() {
+        clearInterval(timerInterval);
+        return time;
+    }
+    return {
+        stopTimer: stopTimer,
+    };
+}
+function showAllCards() {
+    var cardFrontElements = document.querySelectorAll('.card');
+    cardFrontElements.forEach(function (cardFrontElement) {
+        cardFrontElement.classList.remove('selected');
+        cardFrontElement
+            .querySelectorAll('.center__suit, .symbol-top-left, .symbol-bottom-right')
+            .forEach(function (element) {
+            element.style.display = 'block';
+        });
+    });
+}
+function changeCardStyle() {
+    var cardFrontElements = document.querySelectorAll('.card');
+    cardFrontElements.forEach(function (cardFrontElement) {
+        cardFrontElement
+            .querySelectorAll('.center__suit, .symbol-top-left, .symbol-bottom-right')
+            .forEach(function (element) {
+            element.style.display = 'none';
+        });
+        cardFrontElement.classList.add('selected');
+        cardFrontElement.addEventListener('click', function () {
+            cardFrontElement
+                .querySelectorAll('.center__suit, .symbol-top-left, .symbol-bottom-right')
+                .forEach(function (element) {
+                element.style.display = '';
+            });
+            cardFrontElement.classList.remove('selected');
+        });
+    });
+}
+
+
+/***/ }),
+
 /***/ "./src/pagecards.ts":
 /*!**************************!*\
   !*** ./src/pagecards.ts ***!
@@ -434,13 +502,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   renderCards: () => (/* binding */ renderCards)
 /* harmony export */ });
 /* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index */ "./src/index.ts");
-/* harmony import */ var _modulFunc__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modulFunc */ "./src/modulFunc.js");
-/* harmony import */ var timer_node__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! timer-node */ "./node_modules/timer-node/index.js");
-
+/* harmony import */ var _modulFunc__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modulFunc */ "./src/modulFunc.ts");
 
 
 function renderCards(pairCount) {
-    var myTimer = new timer_node__WEBPACK_IMPORTED_MODULE_2__.Timer();
+    var Timer = (__webpack_require__(/*! timer-node */ "./node_modules/timer-node/index.js").Timer);
+    var myTimer = new Timer();
     var appEl = document.getElementById('app');
     var PageHtml = "\n        <div class=\"center__second\">\n            <div class=\"second__main\">\n                <div>\n                    <span class=\"timerMin\">min</span>\n                    <span class=\"timerSec\">sec</span>\n                    <div id=\"timer\" class=\"timer\">00:00</div>\n                </div>\n                <button class=\"game_butt\" id=\"startGame\">\u041D\u0430\u0447\u0430\u0442\u044C \u0437\u0430\u043D\u043E\u0432\u043E</button>\n            </div> \n            <div class=\"second\">\n                <div class=\"card-back\"></div>\n                <div class=\"card-deck\"></div>  \n            </div>\n        </div>";
     var width = pairCount === 3 ? '400px' : pairCount === 6 ? '650px' : 'auto';
@@ -479,6 +546,7 @@ function renderCards(pairCount) {
     goBegin.addEventListener('click', function () {
         (0,_index__WEBPACK_IMPORTED_MODULE_0__.renderChoosePage)();
     });
+    var level = null;
     var firstCard = null;
     var pairsFound = null;
     function clickCardHandler(event) {
@@ -490,6 +558,7 @@ function renderCards(pairCount) {
             return;
         }
         myTimer.start();
+        console.log(myTimer.start());
         if (!firstCard) {
             firstCard = card;
             firstCard.classList.add('card-selected');
@@ -503,18 +572,16 @@ function renderCards(pairCount) {
                     secondCard.classList.add('card-paired');
                     pairsFound++;
                     if (pairsFound === cards.length / 2) {
-                        // @ts-ignore
-                        myTimer.stop()(document.querySelector('#popup-win')).style.display =
+                        myTimer.pause()(document.querySelector('#popup-win')).style.display =
                             'block';
                         document.getElementById('timeWin').innerHTML = timeValue;
                     }
                 }
                 else {
-                    // @ts-ignore
-                    myTimer.stop()(document.querySelector('#popup-lose')).style.display =
+                    myTimer.pause()(document.querySelector('#popup-lose')).style.display =
                         'block';
-                    // @ts-ignore
-                    (0,_modulFunc__WEBPACK_IMPORTED_MODULE_1__.showAllCards)()(document.getElementById('timeLose')).innerHTML = timeValue;
+                    (0,_modulFunc__WEBPACK_IMPORTED_MODULE_1__.showAllCards)();
+                    document.getElementById('timeLose').innerHTML = timeValue;
                 }
                 firstCard = null;
                 secondCard = null;
@@ -526,154 +593,21 @@ function renderCards(pairCount) {
         }
     }
     var cards = document.querySelectorAll('.card');
-    // @ts-ignore
-    for (var _i = 0, cards_1 = cards; _i < cards_1.length; _i++) {
-        var card = cards_1[_i];
+    var cardArray = Array.from(cards);
+    for (var _i = 0, cardArray_1 = cardArray; _i < cardArray_1.length; _i++) {
+        var card = cardArray_1[_i];
         card.addEventListener('click', clickCardHandler);
     }
     var popupCloseBtns = document.querySelectorAll('.popup__btn');
     popupCloseBtns.forEach(function (btn) {
-        btn.addEventListener('click', function () {
+        btn.addEventListener('click', function (event) {
             var popup = this.closest('.popup');
             popup.style.display = 'none';
-            // @ts-ignore
-            renderCards(_index__WEBPACK_IMPORTED_MODULE_0__.level);
+            renderCards(level);
         });
     });
 }
 
-
-/***/ }),
-
-/***/ "./src/modulFunc.js":
-/*!**************************!*\
-  !*** ./src/modulFunc.js ***!
-  \**************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   changeCardStyle: () => (/* binding */ changeCardStyle),
-/* harmony export */   showAllCards: () => (/* binding */ showAllCards),
-/* harmony export */   timerSet: () => (/* binding */ timerSet)
-/* harmony export */ });
-function timerSet(timer) {
-    let time = 0
-
-    function updateTime() {
-        time++
-        const minutes = Math.floor(time / 60)
-        const seconds = Math.floor(time % 60)
-        const formattedTime = pad(minutes) + ':' + pad(seconds)
-        timer.textContent = formattedTime
-    }
-
-    function pad(value) {
-        return value < 10 ? '0' + value : value
-    }
-
-    const timerInterval = setInterval(updateTime, 1000)
-
-    function stopTimer() {
-        clearInterval(timerInterval)
-        return time
-    }
-
-    return {
-        stopTimer: stopTimer,
-    }
-}
-
-function showAllCards() {
-    const cardFrontElements = document.querySelectorAll('.card')
-    cardFrontElements.forEach((cardFrontElement) => {
-        cardFrontElement.classList.remove('selected')
-        cardFrontElement
-            .querySelectorAll(
-                '.center__suit, .symbol-top-left, .symbol-bottom-right'
-            )
-            .forEach((element) => {
-                element.style.display = 'block'
-            })
-    })
-}
-function changeCardStyle() {
-    const cardFrontElements = document.querySelectorAll('.card')
-
-    cardFrontElements.forEach((cardFrontElement) => {
-        cardFrontElement
-            .querySelectorAll(
-                '.center__suit, .symbol-top-left, .symbol-bottom-right'
-            )
-            .forEach((element) => {
-                element.style.display = 'none'
-            })
-
-        cardFrontElement.classList.add('selected')
-
-        cardFrontElement.addEventListener('click', () => {
-            cardFrontElement
-                .querySelectorAll(
-                    '.center__suit, .symbol-top-left, .symbol-bottom-right'
-                )
-                .forEach((element) => {
-                    element.style.display = ''
-                })
-
-            cardFrontElement.classList.remove('selected')
-        })
-    })
-}
-    function clickCardHandler(event) {
-        const card = event.target.closest('.card')
-        let timeValue = myTimer.format('%m.%s')
-
-        if (
-            !card.classList.contains('selected') ||
-            card.classList.contains('card-selected') ||
-            card.classList.contains('card-paired')
-        ) {
-            return
-        }
-        myTimer.start()
-
-        if (!firstCard) {
-            firstCard = card
-            firstCard.classList.add('card-selected')
-        } else {
-            let secondCard = card
-            if (firstCard && secondCard) {
-                if (
-                    firstCard.dataset.rank === secondCard.dataset.rank &&
-                    firstCard.dataset.suit === secondCard.dataset.suit
-                ) {
-                    firstCard.classList.add('card-paired')
-                    secondCard.classList.add('card-paired')
-                    pairsFound++
-                    if (pairsFound === cards.length / 2) {
-                        myTimer.stop()
-                        const popupWin = document.querySelector('#popup-win')
-                        popupWin.style.display = 'block'
-                        document.getElementById('timeWin').innerHTML = timeValue
-                    }
-                } else {
-                    myTimer.stop()
-                    const popupLose = document.querySelector('#popup-lose')
-                    popupLose.style.display = 'block'
-                    firstCard.classList.remove('card-selected')
-                    secondCard.classList.remove('card-selected')
-                    showAllCards()
-                    document.getElementById('timeLose').innerHTML = timeValue
-                }
-                firstCard = null
-                secondCard = null
-            } else {
-                firstCard = card
-                firstCard.classList.add('card-selected')
-            }
-        }
-    }
 
 /***/ })
 
