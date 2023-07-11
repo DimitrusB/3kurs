@@ -92,7 +92,7 @@ export function renderCards(pairCount: number) {
         location.reload();
     })
     let firstCard: any = null
-    let pairsFound: any = null
+    let pairsFound: number = 0
 
     function clickCardHandler(event: any) {
         const card = event.target.closest('.card')
