@@ -477,7 +477,7 @@ function renderCards(pairCount) {
     function clickCardHandler(event) {
         var card = event.target.closest('.card');
         var timeValue = myTimer.format('%m.%s');
-        if (!card.classList.contains('selected') ||
+        if (!(card === null || card === void 0 ? void 0 : card.classList.contains('selected')) ||
             card.classList.contains('card-selected') ||
             card.classList.contains('card-paired')) {
             return;

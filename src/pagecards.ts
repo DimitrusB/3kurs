@@ -94,12 +94,12 @@ export function renderCards(pairCount: number) {
     let firstCard: HTMLElement | null = null;
     let pairsFound: number = 0
 
-    function clickCardHandler(event: any) {
-        const card = event.target.closest('.card')
+    function clickCardHandler(event: Event) {
+        const card = (event.target as HTMLElement).closest('.card');
         let timeValue = myTimer.format('%m.%s')
 
         if (
-            !card.classList.contains('selected') ||
+            !card?.classList.contains('selected') ||
             card.classList.contains('card-selected') ||
             card.classList.contains('card-paired')
         ) {
@@ -110,10 +110,10 @@ export function renderCards(pairCount: number) {
         console.log(myTimer.start())
 
         if (!firstCard) {
-            firstCard = card
+            firstCard = card as HTMLElement | null;
             firstCard?.classList.add('card-selected')
         } else {
-            let secondCard = card
+            let secondCard = card as HTMLElement | null;
             if (firstCard && secondCard) {
                 if (
                     firstCard.dataset.rank === secondCard.dataset.rank &&
@@ -149,7 +149,7 @@ export function renderCards(pairCount: number) {
                 firstCard = null
                 secondCard = null
             } else {
-                firstCard = card
+                firstCard = card as HTMLElement | null;
                 firstCard?.classList.add('card-selected')
             }
         }
