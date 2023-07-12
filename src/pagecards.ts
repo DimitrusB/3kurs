@@ -91,7 +91,7 @@ export function renderCards(pairCount: number) {
     goBegin.addEventListener('click', () => {
         location.reload();
     })
-    let firstCard: any = null
+    let firstCard: HTMLElement | null = null;
     let pairsFound: number = 0
 
     function clickCardHandler(event: any) {
@@ -111,7 +111,7 @@ export function renderCards(pairCount: number) {
 
         if (!firstCard) {
             firstCard = card
-            firstCard.classList.add('card-selected')
+            firstCard?.classList.add('card-selected')
         } else {
             let secondCard = card
             if (firstCard && secondCard) {
@@ -150,7 +150,7 @@ export function renderCards(pairCount: number) {
                 secondCard = null
             } else {
                 firstCard = card
-                firstCard.classList.add('card-selected')
+                firstCard?.classList.add('card-selected')
             }
         }
     }
