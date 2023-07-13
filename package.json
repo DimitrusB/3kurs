@@ -1,0 +1,37 @@
+{
+    "name": "3kurs",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "dev": "webpack --mode production --watch",
+        "build": "SET NODE_ENV='production' && webpack",
+        "start": "webpack-dev-server --open",
+        "format": "prettier --write ./src/",
+        "lint:js": "eslint ./src/**/*.js",
+        "lint:scss": "stylelint **/*.scss"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "copy-webpack-plugin": "^11.0.0",
+        "css-loader": "^6.8.1",
+        "css-minimizer-webpack-plugin": "^5.0.1",
+        "eslint": "^8.44.0",
+        "html-webpack-plugin": "^5.5.3",
+        "mini-css-extract-plugin": "^2.7.6",
+        "prettier": "^2.8.8",
+        "style-loader": "^3.3.3",
+        "stylelint": "^15.9.0",
+        "stylelint-config-standard": "^33.0.0",
+        "stylelint-config-standard-scss": "^10.0.0",
+        "webpack": "^5.88.0",
+        "webpack-cli": "^5.1.4",
+        "webpack-dev-server": "^4.15.1"
+    },
+    "dependencies": {
+        "eslint-config-prettier": "^8.8.0",
+        "eslint-plugin-prettier": "^4.2.1",
+        "timer-node": "^5.0.7"
+    }
+}
