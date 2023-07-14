@@ -1,5 +1,4 @@
-import {timerSet, pad } from './modulFunc'
-
+let pad: any = ''
 describe('pad function', () => {
     test('should return a string with a leading zero when the value is less than 10', () => {
         // Arrange
