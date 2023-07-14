@@ -24,7 +24,10 @@ export function timerSet(timer: HTMLElement): { stopTimer: () => number } {
       stopTimer,
     };
   }
-
+  
+  export function pad(value: number) {
+    return value < 10 ? '0' + value : value.toString();
+  }
   export function showAllCards(): void {
     const cardFrontElements = document.querySelectorAll('.card');
     cardFrontElements.forEach((cardFrontElement) => {

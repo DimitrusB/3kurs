@@ -358,6 +358,7 @@ exports.Timer = Timer;
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   changeCardStyle: () => (/* binding */ changeCardStyle),
+/* harmony export */   pad: () => (/* binding */ pad),
 /* harmony export */   showAllCards: () => (/* binding */ showAllCards),
 /* harmony export */   timerSet: () => (/* binding */ timerSet)
 /* harmony export */ });
@@ -381,6 +382,9 @@ function timerSet(timer) {
     return {
         stopTimer: stopTimer,
     };
+}
+function pad(value) {
+    return value < 10 ? '0' + value : value.toString();
 }
 function showAllCards() {
     var cardFrontElements = document.querySelectorAll('.card');

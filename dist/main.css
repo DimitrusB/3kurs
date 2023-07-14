@@ -88,11 +88,11 @@ body {
   align-content: center;
   align-items: center;
 }
-.main__window_choose label input[type=radio]:checked {
-  background: #ffe0a6;
-}
 .main__window_choose label:hover {
   color: #666;
+}
+.main__window_choose input[type=radio]:checked + label {
+  background: #ffe0a6;
 }
 .main__window_senc {
   width: 208px;
@@ -424,12 +424,12 @@ body {
         align-items: center;
     }
 
-    &_choose label input[type='radio']:checked {
-        background: #ffe0a6;
-    }
-
     &_choose label:hover {
         color: #666;
+    }
+    
+    &_choose input[type='radio']:checked + label {
+        background: #ffe0a6;
     }
 
     &_senc {
